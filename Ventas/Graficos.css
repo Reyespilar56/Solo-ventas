@@ -1,0 +1,108 @@
+/* Estilo personalizado para la página de ventas */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.container-fluid {
+  padding: center 5px;
+}
+
+/* Encabezado */
+header {
+  padding: center  30px;
+}
+
+header img {
+  width:  50%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Estilo general de la tabla */
+#resultTable {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+#resultTable thead th {
+  background-color: #f8f9fa;
+  color: rgb(7, 6, 6);
+  padding: 12px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  font-weight: bold;
+}
+
+#resultTable tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+/* Estilo de las filas de la tabla */
+#resultTable tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#resultTable tbody tr:hover {
+  background-color: #ddd;
+}
+
+/* Estilo para las notas */
+#resultTable tbody td.notas {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+/* Estilos para la tabla en pantallas pequeñas */
+@media (max-width: 767px) {
+    #resultTable {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    #resultTable thead {
+        display: none;
+    }
+    #resultTable tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+    #resultTable td {
+        display: block;
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border: none;
+    }
+    #resultTable td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+/* Estilos para los formularios en pantallas pequeñas */
+@media (max-width: 767px) {
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    .form-control {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* Estilos para botones en pantallas pequeñas */
+@media (max-width: 767px) {
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}

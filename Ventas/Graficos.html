@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas Totales</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tu archivo CSS personalizado -->
+    <link rel="stylesheet" href="Graficos.css">
+</head>
+<body>
+    <header class="container text-center py-4">
+        <img src="https://digy.com.mx/wp-content/uploads/2021/02/logo1sinfondo_Mesa-de-trabajo-1-1024x264.png" alt="Imagen del producto" class="img-fluid">
+    </header>
+    <div class="container-fluid">
+        <h1 class="text-center my-4">VENTAS</h1>
+        
+        <!-- Formulario para calcular ventas por usuario -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <form id="formVentasUsuario">
+                    <div class="form-group">
+                        <label for="selectTipoBusqueda">Seleccionar tipo de búsqueda:</label>
+                        <select class="form-control" id="selectTipoBusqueda">
+                            <option value="zona">Zona</option>
+                            <option value="usuario">Usuario</option>
+                            <option value="telefono">Número Telefónico</option>
+                            <option value="cliente">Nombre de Cliente</option>
+                            <option value="fecha">Fecha</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="divZona">
+                        <label for="valor">Valor:</label>
+                        <input type="text" class="form-control" id="valor" placeholder="Valor">
+                    </div>
+                    <div class="form-group" id="divFecha">
+                        <label for="Fecha">Fecha:</label>
+                        <input type="date" class="form-control" id="Fecha">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btnCalcularUsuario">Buscar Venta</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Botón para calcular ventas generales -->
+        <div class="card">
+            <div class="card-header">Ventas Generales</div>
+            <div class="card-body">
+                <button class="btn btn-success" id="btnCalcularGenerales">Calcular Ventas Generales</button>
+            </div>
+        </div>
+
+        <div class="table-container mt-4">
+            <!-- Resultados -->
+            <table class="table" id="resultTable">
+                <thead>
+                    <h1>RESULTADOS</h1>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Cliente</th>
+                        <th>Dirección</th>
+                        <th>Ubicación</th>
+                        <th>Fecha de Instalación</th>
+                        <th>Teléfono Casa</th>
+                        <th>Teléfono Móvil</th>
+                        <th>Correo Electrónico</th>
+                        <th>Notas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos se insertarán aquí -->
+                </tbody>
+            </table>
+            <div class="card-body">
+                <p id="mensaje"></p>  <!-- Resultado de las operaciones (se mostrará aquí dinámicamente) -->
+                <div id="resultado" class="mt-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="PeticionesV.js"></script>
+    <!-- jQuery (necesario para Bootstrap JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        document.getElementById('selectTipoBusqueda').addEventListener('change', function() {
+            const selectedValue = this.value;
+            document.getElementById('divZona').style.display = selectedValue === 'zona' ? 'block' : 'none';
+            document.getElementById('divFecha').style.display = selectedValue === 'fecha' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
