@@ -21,8 +21,7 @@ peticiones por separado
 
 calcuiladora de megas 
 para palnes de uinternet a clientes 
-dispositvos 
-
+dispositvos GIT A
 
 
 Curso de odo
