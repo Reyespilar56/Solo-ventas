@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Obtener referencia a los botones y elementos del formulario
   var boton = document.getElementById('json_post');
   var logoutButton = document.getElementById('logoutButton');
@@ -16,39 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const inputHora = document.getElementById('Hora');
   const inputMinuto = document.getElementById('Minuto');
   const inputFecha = document.getElementById('Fecha');
-  //const inputphoto_data1 = document.getElementById('photo_data1');
-  //const inputphoto_data2 = document.getElementById('photo_data2');
-  //const inputphoto_data3 = document.getElementById('photo_data3');
-
-  // Botones de Ine, Reverso, y Domicilio
-  const ineButton = document.getElementById('ine_button');
-  const reversoButton = document.getElementById('reverso_button');
-  const domicilioButton = document.getElementById('domicilio_button');
-
-  // Funciones que se ejecutarán al hacer clic en los botones
-  if (ineButton) {
-    ineButton.addEventListener('click', function() {
-      alert('Fotografia lado frontral de la INE.');
-    });
-  } else {
-    console.error('Botón Ine no encontrado');
-  }
-
-  if (reversoButton) {
-    reversoButton.addEventListener('click', function() {
-      alert('fotografia el reverso de la INE.');
-    });
-  } else {
-    console.error('Botón Reverso no encontrado');
-  }
-
-  if (domicilioButton) {
-    domicilioButton.addEventListener('click', function() {
-      alert('Fotografia el Domicilio .');
-    });
-  } else {
-    console.error('Botón Domicilio no encontrado');
-  }
+  const urlDisplay = document.getElementById("urlDisplay");
+  const newSrc = document.getElementById("newSrc");
+  const link3 = document.getElementById("link3");
 
   // Generar un ID aleatorio
   function generateRandomID() {
@@ -62,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Enviar datos de formulario
   if (boton) {
-    boton.addEventListener('click', function() {
+    boton.addEventListener('click', function () {
       var randomid = generateRandomID();
       inputID.value = "cambaceo-" + localStorage.getItem("auth") + "-" + randomid; // Actualizar el valor del campo de ID en el formulario
 
@@ -81,32 +51,34 @@ document.addEventListener('DOMContentLoaded', function() {
           "Fecha": inputFecha.value,
           "Hora": inputHora.value,
           "Minuto": inputMinuto.value,
-         
+        "urlDisplay" : newSrc,
+        "newSrc" : urlDisplay
+
 
         }
       })
-      .then(function(response) {
-        console.log("respuesta", response);
-        if (response.status === 200) {
-          if (response.data && response.data.idcliente) {
-            mensaje.innerHTML = 'Venta enviada: ' + response.data.idcliente;
+        .then(function (response) {
+          console.log("respuesta", response);
+          if (response.status === 200) {
+            if (response.data && response.data.idcliente) {
+              mensaje.innerHTML = 'Venta enviada: ' + response.data.idcliente;
+            } else {
+              mensaje.innerHTML = 'Venta enviada. ID de cliente generado.';
+            }
           } else {
-            mensaje.innerHTML = 'Venta enviada. ID de cliente generado.';
+            console.error('Error:', response.status, response.data);
+            mensaje.innerHTML = 'Error al enviar la venta.';
           }
-        } else {
-          console.error('Error:', response.status, response.data);
-          mensaje.innerHTML = 'Error al enviar la venta.';
-        }
-      })
-      .catch(function(error) {
-        console.error('Error:', error);
-        mensaje.innerHTML = 'Error de red o de conexión.';
-      });
+        })
+        .catch(function (error) {
+          console.error('Error:', error);
+          mensaje.innerHTML = 'Error de red o de conexión.';
+        });
     });
   }
 
   // Verificar el estado de autenticación al cargar la página protegida
-  window.onload = function() {
+  window.onload = function () {
     const auth = localStorage.getItem('auth');
     if (!auth) {
       // Redirigir a la página de inicio de sesión si no está autenticado
@@ -115,14 +87,14 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (logoutButton) {
-    logoutButton.addEventListener('click', function() {
+    logoutButton.addEventListener('click', function () {
       localStorage.removeItem('auth'); // Eliminar estado de autenticación
       window.location.href = 'http://127.0.0.1:5500/index/index.html'; // Redirigir a la página de login
     });
   }
 
   if (foto) {
-    foto.addEventListener('click', function() {
+    foto.addEventListener('click', function () {
       window.location.href = 'http://127.0.0.1:5500/Calculadora/Calculadora.html'; // Redirigir a calculadora
     });
   }
@@ -130,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const botonEncontrar = document.getElementById('encontrar');
   console.log("Botón encontrado:", botonEncontrar); // Verifica que el botón se encuentra
   if (botonEncontrar) { // Asegúrate de que el botón existe
-    botonEncontrar.addEventListener('click', function() {
+    botonEncontrar.addEventListener('click', function () {
       // URL de destino
       window.open('https://www.google.com.mx/maps/preview', '_blank');
     });
@@ -139,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Obtener referencias a los elementos
   const video = document.getElementById('video');
   const canvas = document.getElementById('canvas');
@@ -153,12 +125,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Función para abrir la cámara
   function openCamera() {
     navigator.mediaDevices.getUserMedia({ video: true })
-      .then(function(stream) {
+      .then(function (stream) {
         video.srcObject = stream;
         video.style.display = 'block'; // Mostrar el video
-        video.play();
+        // video.play();
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.error('Error al acceder a la cámara: ', err);
       });
   }
@@ -171,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Función para convertir la foto capturada en un Buffer y luego enviarla al servidor
-  function uploadPhoto(PhotoData, buttonType) {
+  async function uploadPhoto(PhotoData, buttonType) {
     // Convierte la imagen Base64 a un Buffer
     const byteString = atob(PhotoData.split(',')[1]);
     const buffer = new Uint8Array(new ArrayBuffer(byteString.length));
@@ -184,54 +156,69 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Crear un FormData para enviar el archivo
     const formData = new FormData();
-    console.log("holaaaa",formData);
     formData.append('file', blob, `${buttonType}.jpeg`);
+    console.log('Sending request to the server...');
 
-    
-   // Enviar la foto al servidor usando fetch
-fetch('/api/drive/upload', { // Cambia la URL a la ruta del proxy
-  method: 'POST',
-  body: formData,
-  headers: {
-    'Accept': 'application/json'
-  }
-})
-.then(response => {
-  console.log('Respuesta completa:', response);
-  // ... resto del código sin cambios
-})
-.catch(error => {
-  console.error('Error:', error);
-});
+    const response = await axios.post('https://installations-calendar-back.vercel.app/drive/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
 
-    
+    console.log('Response received:', response);
+    return response.data;
   }
 
   // Manejar clic en el botón Ine
-  ineButton.addEventListener('click', function() {
+  ineButton.addEventListener('click', function () {
     openCamera(); // Abrir la cámara
-    setTimeout(() => {
+    setTimeout(async () => {
+      var inputNombre = document.getElementById('nombre');
       const PhotoData = capturePhoto(); // Capturar la foto
-      uploadPhoto(PhotoData, 'INE'); // Enviar la foto al servidor
-    }, 4000); // Esperar 4 segundos para permitir que la cámara se enfoque
+      const respuesta = await uploadPhoto(PhotoData, 'INE' + inputNombre.value); // Enviar la foto al servidor
+      console.log("RESPUESTA INE", respuesta);
+
+      if (respuesta.status == "ok") {
+        const frameIne = document.getElementById("link1");
+        const newSrc = `https://drive.google.com/file/d/${respuesta.id}/preview`; // Definir newSrc aquí
+        frameIne.setAttribute("src", newSrc);
+        const urlDisplay = document.getElementById('urlDisplay'); // Asegúrate de tener un elemento con este ID en tu HTML
+        if (urlDisplay) {
+            urlDisplay.textContent = newSrc; // Mostrar la URL en texto
+        }
+        
+      }
+    }, 3000); // Esperar 3 segundos para permitir que la cámara se enfoque
   });
 
   // Manejar clic en el botón Reverso
-  reversoButton.addEventListener('click', function() {
+  reversoButton.addEventListener('click', function () {
     openCamera(); // Abrir la cámara
-    setTimeout(() => {
+    setTimeout(async () => {
+      var inputNombre = document.getElementById('nombre');
       const PhotoData = capturePhoto(); // Capturar la foto
-      uploadPhoto(PhotoData, 'REVERSO INE'); // Enviar la foto al servidor
-    }, 4000); // Esperar 4 segundos para permitir que la cámara se enfoque
+      const respuesta1 = await uploadPhoto(PhotoData, 'REVERSO INE' + inputNombre.value); // Enviar la foto al servidor
+      console.log("RESPUESTA REVERSO INE", respuesta1);
+      if (respuesta1.status == "ok") {
+        const framereverso = document.getElementById("link2");
+        framereverso.setAttribute("src", `https://drive.google.com/file/d/${respuesta1.id}/preview`);
+      }
+    }, 3000); // Esperar 3 segundos para permitir que la cámara se enfoque
   });
 
   // Manejar clic en el botón Domicilio
-  domicilioButton.addEventListener('click', function() {
+  domicilioButton.addEventListener('click', function () {
     openCamera(); // Abrir la cámara
-    setTimeout(() => {
+    setTimeout(async () => {
+      var inputNombre = document.getElementById('nombre');
       const PhotoData = capturePhoto(); // Capturar la foto
-      uploadPhoto(PhotoData, 'DOMICILIO'); // Enviar la foto al servidor
-    }, 4000); // Esperar 4 segundos para permitir que la cámara se enfoque
+      const respuesta2 = await uploadPhoto(PhotoData, 'DOMICILIO' + inputNombre.value); // Enviar la foto al servidor
+      console.log("RESPUESTA DOMICILIO", respuesta2);
+
+      if (respuesta2.status == "ok") {
+        const framedomicilio = document.getElementById("link3");
+        framedomicilio.setAttribute("src", `https://drive.google.com/file/d/${respuesta2.id}/preview`);
+      }
+    }, 3000); // Esperar 3 segundos para permitir que la cámara se enfoque
   });
 });
-

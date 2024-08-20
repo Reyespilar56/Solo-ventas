@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Convertir Imagen a Binaria</title>
+</head>
+<body>
+    <h1>Convertir Imagen a Binaria</h1>
+    <input type="file" id="imageInput" accept="image/*">
+    <canvas id="originalCanvas"></canvas>
+    <canvas id="binaryCanvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+<script>
+document.getElementById('imageInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const img = new Image();
+        img.onload = function() {
+            // Dibujar la imagen original en el canvas
+            const originalCanvas = document.getElementById('originalCanvas');
+            const ctx = originalCanvas.getContext('2d');
+            originalCanvas.width = img.width;
+            originalCanvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+
+            // Obtener los datos de la imagen
+            const imageData = ctx.getImageData(0, 0, img.width, img.height);
+            const binaryData = convertToBinaryImage(imageData);
+
+            // Dibujar la imagen binaria en el canvas
+            const binaryCanvas = document.getElementById('binaryCanvas');
+            binaryCanvas.width = img.width;
+            binaryCanvas.height = img.height;
+            const binaryCtx = binaryCanvas.getContext('2d');
+            const binaryImageData = binaryCtx.createImageData(img.width, img.height);
+            for (let i = 0; i < binaryData.length; i++) {
+                const value = binaryData[i] * 255; // Convertir 0/1 a 0/255
+                binaryImageData.data[i * 4] = value;
+                binaryImageData.data[i * 4 + 1] = value;
+                binaryImageData.data[i * 4 + 2] = value;
+                binaryImageData.data[i * 4 + 3] = 255; // Opacidad completa
+            }
+            binaryCtx.putImageData(binaryImageData, 0, 0);
+        };
+        img.src = URL.createObjectURL(file);
+    }
+});
+
+function convertToBinaryImage(imageData, threshold = 128) {
+    const binaryImage = [];
+    for (let i = 0; i < imageData.data.length; i += 4) {
+        const grayscale = (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3;
+        const binaryValue = grayscale >= threshold ? 1 : 0;
+        binaryImage.push(binaryValue);
+    }
+    return binaryImage;
+}
+</script>
+</html>
