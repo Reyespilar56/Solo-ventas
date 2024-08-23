@@ -16,9 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const inputHora = document.getElementById('Hora');
   const inputMinuto = document.getElementById('Minuto');
   const inputFecha = document.getElementById('Fecha');
-  const urlDisplay = document.getElementById("urlDisplay");
   const newSrc = document.getElementById("newSrc");
+  const link1 = document.getElementById("link1");
+  const link2 = document.getElementById("link2");
   const link3 = document.getElementById("link3");
+
+  
 
   // Generar un ID aleatorio
   function generateRandomID() {
@@ -51,9 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
           "Fecha": inputFecha.value,
           "Hora": inputHora.value,
           "Minuto": inputMinuto.value,
-        "urlDisplay" : newSrc,
-        "newSrc" : urlDisplay
-
+        "URL_INE" : link1.src,
+        "URL_REVERSO":link2.src,
+        "URL_DOMICILIO":link3.src,
 
         }
       })
@@ -183,9 +186,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const newSrc = `https://drive.google.com/file/d/${respuesta.id}/preview`; // Definir newSrc aquí
         frameIne.setAttribute("src", newSrc);
         const urlDisplay = document.getElementById('urlDisplay'); // Asegúrate de tener un elemento con este ID en tu HTML
-        if (urlDisplay) {
-            urlDisplay.textContent = newSrc; // Mostrar la URL en texto
-        }
+      //  if (urlDisplay) {
+           // urlDisplay.textContent = newSrc; // Mostrar la URL en texto
+      //  }
         
       }
     }, 3000); // Esperar 3 segundos para permitir que la cámara se enfoque
