@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return response.data;
   }
 
-  // Manejar clic en el botón Ine
+  // Manejar clic en el botón Ine...
   ineButton.addEventListener('click', function () {
     openCamera(); // Abrir la cámara
     setTimeout(async () => {
