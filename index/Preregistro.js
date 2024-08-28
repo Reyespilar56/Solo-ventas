@@ -21,6 +21,26 @@ document.addEventListener('DOMContentLoaded', function () {
   const link2 = document.getElementById("link2");
   const link3 = document.getElementById("link3");
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   
 
   // Generar un ID aleatorio
