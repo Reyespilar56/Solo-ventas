@@ -21,28 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const link2 = document.getElementById("link2");
   const link3 = document.getElementById("link3");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
   // Generar un ID aleatorio
   function generateRandomID() {
     const chars = '0123456789';
@@ -109,19 +87,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  if (logoutButton) {
+  /*if (logoutButton) {
     logoutButton.addEventListener('click', function () {
       localStorage.removeItem('auth'); // Eliminar estado de autenticación
       window.location.href = 'http://127.0.0.1:5500/index/index.html'; // Redirigir a la página de login
     });
+    
   }
-
-  if (foto) {
+*/
+  /*if (foto) {
     foto.addEventListener('click', function () {
       window.location.href = 'http://127.0.0.1:5500/Calculadora/Calculadora.html'; // Redirigir a calculadora
     });
   }
-
+    */
   const botonEncontrar = document.getElementById('encontrar');
   console.log("Botón encontrado:", botonEncontrar); // Verifica que el botón se encuentra
   if (botonEncontrar) { // Asegúrate de que el botón existe
