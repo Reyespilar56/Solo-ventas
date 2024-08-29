@@ -101,6 +101,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
     */
+
+  
   const botonEncontrar = document.getElementById('encontrar');
   console.log("Botón encontrado:", botonEncontrar); // Verifica que el botón se encuentra
   if (botonEncontrar) { // Asegúrate de que el botón existe
