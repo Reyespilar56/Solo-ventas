@@ -127,6 +127,8 @@ const anticipoAmountInput = document.getElementById("anticipoAmountInput");
   }
     */
 
+  
+
   const botonEncontrar = document.getElementById('encontrar');
   const Coordenadas = document.getElementById('coordenadas'); // Obtén el input de coordenadas
   
@@ -154,6 +156,8 @@ const anticipoAmountInput = document.getElementById("anticipoAmountInput");
   } else {
     console.error("No se encontró el botón con el ID 'encontrar' o el input con el ID 'coordenadas'");
   }
+  
+
   
 });
 
