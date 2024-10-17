@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Obtener referencia a los botones y elementos del formulario
-  var boton = document.getElementById('json_post');
-  var logoutButton = document.getElementById('logoutButton');
-  var foto = document.getElementById('foto');
+
   var mensaje = document.getElementById('mensaje');
   var inputNombre = document.getElementById('nombre');
   const inputEmail = document.getElementById('email');
@@ -27,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const inputcp=document.getElementById("cp")
   const inputentreCalles=document.getElementById("entreCalles")
   
-  const button = document.getElementById('confirmar');
+  const confirmar = document.getElementById('confirmar');
  
 const anticipoAmountInput = document.getElementById("anticipoAmountInput");
 
@@ -47,24 +45,26 @@ const anticipoAmountInput = document.getElementById("anticipoAmountInput");
     confirmar.addEventListener('click', function () {
       var randomid = generateRandomID();
       inputID.value = "cambaceo-" + localStorage.getItem("auth") + "-" + randomid; // Actualizar el valor del campo de ID en el formulario
-     
-      axios.post(' http://localhost:3000/instalacion', {
+      
+      // Log para verificar el ID
+      console.log("Valor de inputID: ", inputID.value);
+    
+      axios.post('http://localhost:3000/instalacion', {
         data: {
-          "Cobro":`${anticipoAmountInput.value}`,
+          
+          "Cobro": `${anticipoAmountInput.value}`,
           "token": "Smx2SVdkbUZIdjlCUlkxdFo1cUNMQT09",
           "Nombre": inputNombre.value,
           "email": inputEmail.value,
           "telefono": inputTelefono.value,
           "telefonocasa": inputTelefonocasa.value,
-       "domicilio": 
-    `Domicilio: ${inputDomicilio.value}
-    \nEntre Calles: ${inputentreCalles.value}
-    \nC.P.: ${inputcp.value}
-    \nNúmero Interior: ${inputnumeroInt.value}
-    \nNúmero Exterior: ${inputnumeroExt.value}
-    \nCalle: ${inputcalle.value}`
-,
-        "referencias": inputReferencias.value,
+          "domicilio": `
+            \nEntre Calles: ${inputentreCalles.value}
+            \nC.P.: ${inputcp.value}
+            \nNúmero Interior: ${inputnumeroInt.value}
+            \nNúmero Exterior: ${inputnumeroExt.value}
+            \nCalle: ${inputcalle.value}`,
+          "referencias": inputReferencias.value,
           "coordenadas": inputCoordenadas.value,
           "ID": inputID.value,
           "paquete": inputpaquete.value,
@@ -72,36 +72,36 @@ const anticipoAmountInput = document.getElementById("anticipoAmountInput");
           "FechaIni": FechaInicio.value,
           "HoraIni": HoraInicio.value,
           "HoraFin": HoraFin.value,
-          "URL_INE" : link1.href,
-          "URL_REVERSO":link2.href,
-          "URL_DOMICILIO":link3.href,
-          "notas":notas.value
-          
-
+         "URL_INE": link1.href,
+          "URL_REVERSO": link2.href,
+          "URL_DOMICILIO": link3.href,
+          "notas": notas.valu
         }
-        
       })
-  
-        .then(function (response) {
-          console.log("respuesta", response);
-          if (response.status === 200) {
-            if (response.data && response.data.idcliente) {
-              mensaje.innerHTML = 'Venta enviada: ' + response.data.idcliente;
-            } else {
-              mensaje.innerHTML = 'Venta enviada. ID de cliente generado.';
-            }
+      .then(function (response) {
+        console.log("respuesta", response);
+        if (response.status === 200) {
+          if (response.data && response.data.idcliente) {
+            mensaje.innerHTML = 'Venta enviada: ' + response.data.idcliente;
           } else {
-            console.error('Error:', response.status, response.data);
-            mensaje.innerHTML = 'Error al enviar la venta.';
+            mensaje.innerHTML = 'Venta enviada. ID de cliente generado.';
           }
-        })
-        .catch(function (error) {
-          console.error('Error:', error);
-          mensaje.innerHTML = 'Error de red o de conexión.';
-        });
-    });
     
+          
+        } else {
+          console.error('Error:', response.status, response.data);
+          mensaje.innerHTML = 'Error al enviar la venta.';
+        }
+      })
+    
+      .catch(function (error) {
+        console.error('Error:', error);
+        mensaje.innerHTML = 'Error de red o de conexión.';
+      });
+    });
+     
   }
+  
  
   // Verificar el estado de autenticación al cargar la página protegida
   window.onload = function () {
@@ -127,28 +127,34 @@ const anticipoAmountInput = document.getElementById("anticipoAmountInput");
   }
     */
 
-  
   const botonEncontrar = document.getElementById('encontrar');
+  const Coordenadas = document.getElementById('coordenadas'); // Obtén el input de coordenadas
+  
   console.log("Botón encontrado:", botonEncontrar); // Verifica que el botón se encuentra
-  if (botonEncontrar) { // Asegúrate de que el botón existe
+  
+  if (botonEncontrar && Coordenadas) { // Asegúrate de que el botón y el input existen
     botonEncontrar.addEventListener('click', function () {
-      // URL de destino
-      window.open('https://www.google.com.mx/maps/preview', '_blank');
+      // Verificar si el navegador soporta geolocalización
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (posicion) {
+          const latitud = posicion.coords.latitude;
+          const longitud = posicion.coords.longitude;
+  
+          // Mostrar las coordenadas en el campo de entrada
+          inputCoordenadas.value = ` ${latitud},${longitud}`;
+        }, function (error) {
+          console.error("Error obteniendo la ubicación: ", error);
+          inputCoordenadas.value = "No se pudo obtener tu ubicación.";
+        });
+      } else {
+        console.error("La geolocalización no es soportada por este navegador.");
+        inputCoordenadas.value = "Tu navegador no soporta geolocalización.";
+      }
     });
   } else {
-    console.error("No se encontró el botón con el ID 'encontrar'");
+    console.error("No se encontró el botón con el ID 'encontrar' o el input con el ID 'coordenadas'");
   }
-});
-
-const anticipoSelect = document.getElementById("Anticipo");
-const anticipoAmountDiv = document.getElementById("anticipoAmount");
-
-anticipoSelect.addEventListener("change", () => {
-    if (anticipoSelect.value === "SI") {
-        anticipoAmountDiv.style.display = "block";
-    } else {
-        anticipoAmountDiv.style.display = "none";
-    }
+  
 });
 
 // FUNCION MODAL Y ENVIO DE DATOS 
@@ -188,8 +194,6 @@ botonEnviar.addEventListener('click', () => {
 
      Telefonocasa : {valor:document.getElementById('telefonocasa').value,nombre:"Telefono Casa"},
 
-     Domicilio : {valor:document.getElementById('Domicilio').value,nombre:"Domicilio"},
-
     paquete : {valor:document.getElementById('paquete').value,nombre:"paquete"},
 
     En_Horario_de:  {valor:document.getElementById('HoraInicio').value, nombre: "En horario de"},
@@ -226,3 +230,13 @@ cancelarBtn.addEventListener('click', () => {
   modal.style.display = 'none';
 });
 
+const anticipoSelect = document.getElementById("Anticipo");
+const anticipoAmountDiv = document.getElementById("anticipoAmount");
+
+anticipoSelect.addEventListener("change", () => {
+    if (anticipoSelect.value === "SI") {
+        anticipoAmountDiv.style.display = "block";
+    } else {
+        anticipoAmountDiv.style.display = "none";
+    }
+});

@@ -26,14 +26,7 @@
         <input type="text" class="form-control" id="nombre" name="nombre"  placeholder="Nombre Del Cliente"required>
       </div>
 
-      <div class="mb-3">
-        <label for="Domicilio" class="form-label">Dirección:</label>
-        <input type="text" class="form-control" id="Domicilio" name="Domicilio"  placeholder="Direccion"required>
-      </div>
-      <div class="mb-3">
-        <label for="referencias" class="form-label">Referencias:</label>
-        <input type="text" class="form-control" id="referencias" name="referencias" placeholder="Color de la casa" required>
-    </div>
+     
     
     <div class="mb-3">
       <label for="NUmero Ext" class="form-label">Nombre de la calle :</label>
@@ -53,14 +46,18 @@
       <label for="cp" class="form-label">Codigo postal:</label>
         <input type="text" class="form-control" id="cp" name="cp" placeholder="Código Postal (C.P.)" required>
     </div>
-    <label for="calles" class="form-label">Entre Calles:</label>
+    <label for="entreCalles" class="form-label">Entre Calles:</label>
     <div class="mb-3">
         <input type="text" class="form-control" id="entreCalles" name="entreCalles" placeholder="Entre qué calle y qué calle" required>
     </div>
+    <div class="mb-3">
+      <label for="referencias" class="form-label">Referencias:</label>
+      <input type="text" class="form-control" id="referencias" name="referencias" placeholder="Color de la casa" required>
+  </div>
     
       <div class="mb-3">
         <label for="email" class="form-label">Correo Electrónico:</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Correo E" >
+        <input type="email" class="form-control" id="email" name="email" placeholder="Correo Electronico " >
       </div>
 
       <div class="mb-3">
@@ -113,7 +110,8 @@
             <label for="FechaFin" class="form-label">A:</label>
             <input type="date" id="FechaFin" name="FechaFin" class="form-control" required>
         </div>
-    
+      </div>
+      <div class="mb-3 d-flex justify-content-between">
         <div class="w-50">
             <label for="HoraInicio" class="form-label">En Horario de :</label>
             <select id="HoraInicio" name="HoraInicio" class="form-select" required>
@@ -131,6 +129,7 @@
                 <option value="19:00">19:00</option>
             </select>
         </div>
+        
     
         <div class="w-50">
             <label for="HoraFin" class="form-label"> A:</label>
@@ -242,7 +241,8 @@
              <button type="button" class="btn btn-danger"  >Cancelar</button>   </div>
       </div>
 
-      
+      <ul id="listaDocumentos"></ul>
+
       <style>
         .button-container {
           display: flex;
@@ -260,11 +260,22 @@
     <video id="video" width="640" height="480" autoplay style="display:none;"></video>
     <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
   </section>
-
+  <script type="module">
+    // Importa las funciones necesarias de Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+  </script>
+  
   <!-- Inclusión de script para manejar la solicitud POST con Axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="Preregistro.js"></script> <!-- Asumiendo que este es tu script personalizado -->
   <script src="capturarFotos.js"></script>
+  <script type="module" src="firebaseConfig.js"></script>
+  <script type="module">
+    // Importa las funciones necesarias de Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+  </script>
 
 </body>
 

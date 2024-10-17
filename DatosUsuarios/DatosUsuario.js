@@ -32,7 +32,7 @@ bton.addEventListener('click', function() {
 });
 
 // Función para validar los datos del formulario
-function validarFormulario(Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena, confirmarContrasena) {
+function validarFormulario(nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena, confirmarContrasena) {
   // Expresión regular para validar el formato del correo electrónico
   var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -58,30 +58,40 @@ function validarFormulario(Nombre, correoElectronico, Telefono, TelefonoMovil, D
   return true;
 }
 
-// Función para enviar la solicitud al servidor
+// Función para enviar la solicitud al servidor usando axios
 function enviarSolicitud(usuarioId, Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena) {
   console.log("solicitud enviada"); // Muestra en la consola que la solicitud fue enviada
-  // Realiza una petición POST al servidor con los datos del usuario
-  axios.post('https://ventas-cambaceo-back.vercel.app/usuario', {
-    data: {
-      "id": usuarioId,
-      "Nombre": Nombre,
-      "Telefono": Telefono,
-      "TelefonoMovil": TelefonoMovil,
-      "Direccion": Direccion,
-      "contrasena": contrasena,
-      "correoElectronico": correoElectronico,
-      "usuario": usuario,
+
+  // Realiza una petición POST al servidor con los datos del usuario y headers personalizados
+  axios.post('https://us-central1-ventasdigy-ce0eb.cloudfunctions.net/addUser', 
+    
+      {
+        "clave": contrasena,
+        "movil": TelefonoMovil,
+        "correo": correoElectronico,
+        "direccion": Direccion,
+        "telefono": Telefono,
+        "usuario": usuario,
+        "nombre": Nombre,
+        //"contrasena": contrasena, // Si es necesario enviarla, descomentar esta línea
+    
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        
+      }
     }
+  )
+  .then(function (response) {
+    console.log("respuesta", response.data); // Muestra la respuesta del servidor en la consola
+    alert('Usuario agregado correctamente. ' + JSON.stringify(response.data)); // Muestra un mensaje de éxito con los datos
   })
-  .then(function(res) {
-    console.log("respuesta", res); // Muestra la respuesta del servidor en la consola
-    if (res.status === 200) {
-      alert('Usuario agregado correctamente. ' + res.data); // Muestra un mensaje de éxito si la respuesta es exitosa
-    }
-  })
-  .catch(function(err) {
-    console.log(err); // Muestra el error en la consola si la petición falla
+  .catch(function (error) {
+    console.log(error); // Muestra el error en la consola si la petición falla
     alert('Hubo un error al registrar al Usuario.'); // Muestra un mensaje de error
   });
+
+  
 }
+

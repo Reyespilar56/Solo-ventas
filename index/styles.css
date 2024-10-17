@@ -145,21 +145,6 @@ body {
   background-color: #c82333; /* Color de fondo rojo más oscuro al pasar el mouse */
 }
 
-/* Diseño responsivo */
-@media (max-width: 768px) {
-  #logoutButton {
-      font-size: 1em; /* Tamaño de fuente más pequeño en pantallas pequeñas */
-      padding: 10px 15px; /* Menos espaciado interno en pantallas pequeñas */
-  }
-}
-
-@media (min-width: 769px) {
-  #logoutButton {
-      font-size: 1.2em; /* Tamaño de fuente normal en pantallas grandes */
-      padding: 12px 20px; /* Espaciado interno normal en pantallas grandes */
-  }
-}
-
 /*------------------MODAL --------------------------*/
 .modal {
   display: none; /* Inicialmente oculto */
@@ -181,4 +166,21 @@ body {
   border: 1px solid #888;
   width: 80%; /* Ancho del modal, puedes ajustarlo */
   max-width: 400px; /* Ancho máximo para pantallas pequeñas */
+}
+
+.time-select-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.time-select {
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .time-select-container {
+      flex-direction: column;
+  }
 }

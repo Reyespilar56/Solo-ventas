@@ -25,30 +25,41 @@ function validarFormulario(usuario, contrasena) {
     return false;
 }
 
-// Función para recibir datos del servidor
-async function recibirDatos(usuario, contrasena) {
+
+
+  // Función para recibir datos del servidor
+async function recibirDatos(usuario, clave) {
     console.log("Recibiendo datos"); // Muestra en la consola que se está recibiendo datos
 
     try {
-        // Realiza la solicitud GET al servidor
-        const respuesta = await axios.get('https://ventas-cambaceo-back.vercel.app/Login', {
-            params: {
-                usuario: usuario,
-                contrasena: contrasena
+        // Realiza la solicitud GET al servidor con headers
+        const respuesta = await axios.post('https://us-central1-ventasdigy-ce0eb.cloudfunctions.net/validateUser', 
+      
+             {
+                "usuario": usuario,
+                "clave": clave // Se cambió "clave" a "contrasena" para que coincida con el parámetro de la función
+            },
+            {
+            headers: {
+                'Content-Type': 'application/json', 
             }
-        });
+        }
+    )
 
         console.log("DATOS VALIDADOS ", respuesta);
 
         // Verifica si la respuesta es exitosa y redirige si es el caso
         if (respuesta.status === 200) {
-            localStorage.setItem("auth", usuario);
-            window.location.href = '/index/index.html'; // Redirige a la calculadora u otra página
+            localStorage.setItem("auth", clave);
+            window.location.href = '/index/index.html'; // Redirige 
         } else {
             alert("Error al ingresar: Credenciales incorrectas.");
         }
     } catch (error) {
         console.error('Error al hacer la solicitud:', error);
-        alert('Contraseña o Usuario incorrecto ');
+        alert('Contraseña o Usuario incorrecto'
+        
+        );
+
     }
 }
