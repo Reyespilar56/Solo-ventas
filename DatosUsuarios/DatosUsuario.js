@@ -63,7 +63,7 @@ function enviarSolicitud(usuarioId, Nombre, correoElectronico, Telefono, Telefon
   console.log("solicitud enviada"); // Muestra en la consola que la solicitud fue enviada
 
   // Realiza una petición POST al servidor con los datos del usuario y headers personalizados
-  axios.post('https://us-central1-ventasdigy-ce0eb.cloudfunctions.net/addUser', 
+  /*axios.post('https://us-central1-ventasdigy-ce0eb.cloudfunctions.net/addUser', 
     
       {
         "clave": contrasena,
@@ -90,8 +90,7 @@ function enviarSolicitud(usuarioId, Nombre, correoElectronico, Telefono, Telefon
   .catch(function (error) {
     console.log(error); // Muestra el error en la consola si la petición falla
     alert('Hubo un error al registrar al Usuario.'); // Muestra un mensaje de error
-  });
+  });*/
 
   
 }
-

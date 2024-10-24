@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
  
 const anticipoAmountInput = document.getElementById("anticipoAmountInput");
 
+const defaultUrl = "http://127.0.0.1:5500/index/index.html";
+
 
   // Generar un ID aleatorio
   function generateRandomID() {
@@ -48,7 +50,7 @@ const anticipoAmountInput = document.getElementById("anticipoAmountInput");
       
       // Log para verificar el ID
       console.log("Valor de inputID: ", inputID.value);
-    
+      console.log("HREFS",link1.href, "LINK", link1 );
       axios.post('http://localhost:3000/instalacion', {
         data: {
           
@@ -72,10 +74,10 @@ const anticipoAmountInput = document.getElementById("anticipoAmountInput");
           "FechaIni": FechaInicio.value,
           "HoraIni": HoraInicio.value,
           "HoraFin": HoraFin.value,
-         "URL_INE": link1.href,
-          "URL_REVERSO": link2.href,
-          "URL_DOMICILIO": link3.href,
-          "notas": notas.valu
+          "URL_INE": (link1.href === "" || link1.href === defaultUrl) ? "" : link1.href,
+         "URL_REVERSO": (link2.href === "" || link2.href === defaultUrl) ? "" : link2.href,
+          "URL_DOMICILIO": (link3.href === "" || link3.href === defaultUrl) ? "" : link3.href,
+          "notas": notas.value
         }
       })
       .then(function (response) {

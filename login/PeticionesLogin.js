@@ -31,9 +31,9 @@ function validarFormulario(usuario, contrasena) {
 async function recibirDatos(usuario, clave) {
     console.log("Recibiendo datos"); // Muestra en la consola que se está recibiendo datos
 
-    try {
+    /*try {
         // Realiza la solicitud GET al servidor con headers
-        const respuesta = await axios.post('https://us-central1-ventasdigy-ce0eb.cloudfunctions.net/validateUser', 
+       const respuesta = await axios.post('https://us-central1-ventasdigy-ce0eb.cloudfunctions.net/validateUser', 
       
              {
                 "usuario": usuario,
@@ -61,5 +61,5 @@ async function recibirDatos(usuario, clave) {
         
         );
 
-    }
+    }*/
 }

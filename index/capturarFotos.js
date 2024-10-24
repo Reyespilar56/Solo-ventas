@@ -59,9 +59,10 @@ fileInputs.forEach(input => {
                     const respuesta = await uploadPhoto(fotoData, 'INE' + inputNombre.value);
                     console.log("RESPUESTA INE", respuesta);
                     if (respuesta.status == "ok") {
-                        const newSrc = `https://drive.google.com/file/d/${respuesta.id}/preview`; // Definir newSrc aquí
+                        const newSrc = `https:drive.google.com/file/d/${respuesta.id}/preview`; // Definir newSrc aquí
                         const urlDisplay = document.getElementById('urlDisplayINE'); // Asegúrate de tener un elemento con este ID en tu HTML
                             if (urlDisplay) {
+                                console.log("oliiiii",newSrc);
                             urlDisplay.href = newSrc; // Mostrar la URL en texto
                             }
                     }
@@ -71,9 +72,10 @@ fileInputs.forEach(input => {
                     console.log("RESPUESTA REVERSO", respuesta);
 
                     if (respuesta.status == "ok") {
-                        const newSrc = `https://drive.google.com/file/d/${respuesta.id}/preview`; // Definir newSrc aquí
+                        const newSrc =`https://drive.google.com/file/d/${respuesta.id}/preview`; // Definir newSrc aquí
                         const urlDisplay = document.getElementById('urlDisplayREVERSO'); // Asegúrate de tener un elemento con este ID en tu HTML
                             if (urlDisplay) {
+                                console.log("oliiiii",newSrc);
                             urlDisplay.href = newSrc; // Mostrar la URL en texto
                             }
                     }
@@ -86,6 +88,8 @@ fileInputs.forEach(input => {
                         const newSrc = `https://drive.google.com/file/d/${respuesta.id}/preview`; // Definir newSrc aquí
                         const urlDisplay = document.getElementById('urlDisplayDOMICILIO'); // Asegúrate de tener un elemento con este ID en tu HTML
                             if (urlDisplay) {
+                                console.log("oliiiii",newSrc);
+                                
                                urlDisplay.href = newSrc; // Mostrar la URL en texto
                             }
                     }
@@ -95,8 +99,6 @@ fileInputs.forEach(input => {
         }
         
     });
-
-
 
 
     
