@@ -51,7 +51,7 @@ confirmar.addEventListener("click", async (e) => {
     const inputcp = document.getElementById("cp");
     const inputentreCalles = document.getElementById("entreCalles");
     
-
+    const defaultUrl = "http://127.0.0.1:5500/index/index.html";
 
    
     try {
@@ -74,9 +74,9 @@ confirmar.addEventListener("click", async (e) => {
           notas: notas.value,
           fecha_instalacion: `${FechaInicio.value} - ${FechaFin.value}`,
           hora_instalacion: `HoraIni: ${HoraInicio.value}, HoraFin: ${HoraFin.value}`,
-          ine_frontal: link1.href,
-          ine_reverso: link2.href,  
-          domicilio:link3.href,    
+          ine_frontal: (link1.href === "" || link1.href === defaultUrl) ? "" : link1.href, 
+          ine_reverso: (link2.href === "" || link2.href === defaultUrl) ? "" : link2.href,
+          domicilio:(link3.href === "" || link3.href === defaultUrl) ? "" : link3.href, 
           anticipo: anticipoAmountInput.value,
 
         });

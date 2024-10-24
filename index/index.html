@@ -200,7 +200,7 @@
                       class="btn btn-outline-success" style="height: 3.3%;">INE</button></th> -->
                   <th><input type="file" accept="image/*" class="file-input" data-photo-index="0"></th>
                   <th><input type="file" accept="image/*" class="file-input" data-photo-index="1"></th>
-                  <th><input type="file" accept="image/*" class="file-input" data-photo-index="2"></th>
+                  <th><input type="file" accept="image/*" class="file-input" data-photo-index="2" multiple></th>
                   <!-- <th><button for="photo_data2" id="reverso_button" name="photo_data2" type="button"
                       class="btn btn-outline-success"style="height: 3.3%;">Reverso</button></th>
                   <th><button for="photo_data1" id="domicilio_button" name="photo_data3" type="button"
@@ -210,15 +210,15 @@
                 <tr>
                   <th style="height: 33.2%;">
                     <img id="photo1" alt="" style="width: 33.3%;" />
-                    <a id="urlDisplayINE" href="//" target="_blank" style="height: 33.2%; color:#4CAF50; text-decoration:none;"></br>INE</a>
+                    <a id="urlDisplayINE" href="" target="_blank" style="height: 33.2%; color:#4CAF50; text-decoration:none;"></br>INE</a>
                   </th>
                   <th>
                     <img id="photo2" alt="" style="width: 33.3%;" />
-                    <a id="urlDisplayREVERSO" href="//" target="_blank" style="height: 33.2%; color:#4CAF50; text-decoration:none;"></br>REVERSO</a>
+                    <a id="urlDisplayREVERSO" href="" target="_blank" style="height: 33.2%; color:#4CAF50; text-decoration:none;"></br>REVERSO</a>
                   </th>
                   <th>
                     <img id="photo3" alt="" style="width: 33.2%;" />
-                    <a id="urlDisplayDOMICILIO" href="//" target="_blank" style="height: 33.2%; color:#4CAF50; text-decoration:none;"></br>DOMICILIO</a>
+                    <a id="urlDisplayDOMICILIO" href="" target="_blank" style="height: 33.2%; color:#4CAF50; text-decoration:none;"></br>DOMICILIO</a>
                   </th>
                 </tr>
                 
@@ -267,11 +267,14 @@
   </script>
   
   <!-- Inclusión de script para manejar la solicitud POST con Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="Preregistro.js"></script> <!-- Asumiendo que este es tu script personalizado -->
+  <script src="Preregistro.js"></script> 
   <script src="capturarFotos.js"></script>
   <script type="module" src="firebaseConfig.js"></script>
   <script type="module">
+
+
     // Importa las funciones necesarias de Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
