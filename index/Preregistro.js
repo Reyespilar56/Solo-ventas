@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const inputnumeroExt=document.getElementById("numeroExt")
   const inputcp=document.getElementById("cp")
   const inputentreCalles=document.getElementById("entreCalles")
-  
   const confirmar = document.getElementById('confirmar');
  
 const anticipoAmountInput = document.getElementById("anticipoAmountInput");
@@ -183,6 +182,13 @@ function mostrarResumen(datos) {
     resumenLista.appendChild(li);
   }
 }
+// Asegúrate de que esté declarada globalmente
+const defaultUrl = "http://127.0.0.1:5500/index/index.html";
+
+
+// function validarUrl(link) {
+//   return (link.href === "" || link.href === defaultUrl) ? 'No se ha capturado la foto' : link.href;
+// }
 
 // Evento al hacer clic en el botón de enviar
 botonEnviar.addEventListener('click', () => {
@@ -204,7 +210,7 @@ botonEnviar.addEventListener('click', () => {
 
     En_Horario_de:  {valor:document.getElementById('HoraInicio').value, nombre: "En horario de"},
     
-     FechaFin:{valor:document.getElementById('HoraFin').value,nombre:"A "},
+    FechaFin:{valor:document.getElementById('HoraFin').value,nombre:"A "},
 
     Fecha_de : {valor:document.getElementById('FechaInicio').value,nombre:"Fecha de "},
     
@@ -220,7 +226,13 @@ botonEnviar.addEventListener('click', () => {
 
     Codigo_Postal:{valor:document.getElementById("cp").value,nombre:"Codigo Postal"},
 
-     Entre_Calles: {valor:document.getElementById("entreCalles").value,nombre:"Entre Calles"},
+   Entre_Calles: {valor:document.getElementById("entreCalles").value,nombre:"Entre Calles"},
+
+  // INE: {valor: validarUrl(document.getElementById("urlDisplayINE")), nombre:"INE"},
+  //    REVERSO: {valor: validarUrl(document.getElementById("urlDisplayREVERSO")), nombre:"REVERSO"},
+  //    DOMICILIO: { valor: validarUrl(document.getElementById("urlDisplayDOMICILIO")), nombre:"DOMICILIO"},
+
+
   };
 
   // Mostrar el resumen en el modal
@@ -245,4 +257,14 @@ anticipoSelect.addEventListener("change", () => {
     } else {
         anticipoAmountDiv.style.display = "none";
     }
+    // Función para cerrar sesión
+function cerrarSesion() {
+  localStorage.clear(); // Elimina todos los datos del almacenamiento local
+  window.location.href = '/login/Login.html'; // Redirige a la página de inicio de sesión
+}
+
+// Asignar la función de cerrar sesión al botón
+const buttonCerrarSesion = document.getElementById('logoutButton');
+buttonCerrarSesion.addEventListener('click', cerrarSesion);
+
 });

@@ -26,8 +26,6 @@
         <input type="text" class="form-control" id="nombre" name="nombre"  placeholder="Nombre Del Cliente"required>
       </div>
 
-     
-    
     <div class="mb-3">
       <label for="NUmero Ext" class="form-label">Nombre de la calle :</label>
         <input type="text" class="form-control" id="calle" name="calle" placeholder="Nombre de la calle" required>
@@ -190,17 +188,15 @@
             <h6>FOTOGRAFÍAS</h6>
             <video id="video" autoplay playsinline style="display:none;"></video>
             <canvas id="canvas" style="display:none;"></canvas>
-            <!-- <button id="startCameraButton">Activar Cámara</button>
-            <button id="closeCamera" style="display:none;">Desactivar Cámara</button> -->
-            <!-- <button id="captureButton" style="display:none;">Tomar Foto</button> -->
+         
             <table id="tabla" class="table table-bordered">
               <thead >
                 <tr>
                   <!-- <th><button for="photo_data1" id="ine_button" name="photo_data1" type="button"
                       class="btn btn-outline-success" style="height: 3.3%;">INE</button></th> -->
-                  <th><input type="file" accept="image/*" class="file-input" data-photo-index="0"></th>
-                  <th><input type="file" accept="image/*" class="file-input" data-photo-index="1"></th>
-                  <th><input type="file" accept="image/*" class="file-input" data-photo-index="2" multiple></th>
+                  <th id="ine"><input type="file" accept="image/*" class="file-input" data-photo-index="0" ></th>
+                  <th id="reverso"><input type="file" accept="image/*" class="file-input" data-photo-index="1" ></th>
+                  <th id="domicilio"><input type="file" accept="image/*" class="file-input" data-photo-index="2" multiple ></th>
                   <!-- <th><button for="photo_data2" id="reverso_button" name="photo_data2" type="button"
                       class="btn btn-outline-success"style="height: 3.3%;">Reverso</button></th>
                   <th><button for="photo_data1" id="domicilio_button" name="photo_data3" type="button"

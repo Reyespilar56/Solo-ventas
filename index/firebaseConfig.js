@@ -60,6 +60,7 @@ confirmar.addEventListener("click", async (e) => {
         
         const docRef = await addDoc(collection(db, "ventas"), {
           cliente: inputNombre.value,
+          ID_venta: inputID.value,
           paquete: inputpaquete.value,
           email: inputEmail.value,
           movil: inputTelefono.value,
