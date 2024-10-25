@@ -17,11 +17,9 @@ const db = getFirestore(app);
 
 // Función para validar usuario y contraseña
 async function validarCredenciales(usuarioIngresado, contrasenaIngresada) {
-  // Crear una consulta para obtener el documento que tenga el campo "Usuario" igual al usuario ingresado
   const q = query(collection(db, "usuarios"), where("Usuario", "==", usuarioIngresado));
 
   try {
-    // Ejecutar la consulta
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
@@ -29,15 +27,11 @@ async function validarCredenciales(usuarioIngresado, contrasenaIngresada) {
       return false;  // Usuario no encontrado
     }
 
-    // Suponiendo que los nombres de usuario son únicos, solo debería haber un documento
     let esValido = false;
     querySnapshot.forEach((doc) => {
       const datosUsuario = doc.data();
-      
-      // Hashear la contraseña ingresada
       const hashedPasswordIngresada = CryptoJS.SHA256(contrasenaIngresada).toString();
 
-      // Comparar el hash de la contraseña ingresada con la almacenada en la base de datos
       if (datosUsuario.contraseña === hashedPasswordIngresada) {
         esValido = true;
         console.log("Inicio de sesión exitoso.");
@@ -59,20 +53,14 @@ const button = document.getElementById('json_post');
 button.addEventListener("click", async (e) => {
   e.preventDefault(); // Evitar recarga de página
 
-  // Obtener los valores ingresados por el usuario
   const usuarioIngresado = document.getElementById('usuario').value;
   const contrasenaIngresada = document.getElementById('contrasena').value;
 
-  // Llamar a la función de validación
   const esValido = await validarCredenciales(usuarioIngresado, contrasenaIngresada);
 
   if (esValido) {
-    // Redirigir a la página principal o mostrar mensaje de éxito
-    console.log("Usuario autenticado correctamente");
-    // Aquí puedes redirigir, por ejemplo:
-    window.location.href = "/index/index.html";
-  } else {
-    // Mostrar mensaje de error
-    console.log("Usuario o contraseña incorrectos");
-  }
+  
+    localStorage.setItem("auth", usuarioIngresado);
+    window.location.href = '/index/index.html'; // Redirige si las credenciales son válidas
+  } 
 });
