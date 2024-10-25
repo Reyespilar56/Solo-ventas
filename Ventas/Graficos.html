@@ -96,7 +96,7 @@
             </div>
         </div>
     </div>
-
+  
     <!-- Scripts -->
     <script src="PeticionesV.js"></script>
     <!-- jQuery (necesario para Bootstrap JavaScript plugins) -->
@@ -106,6 +106,11 @@
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="app.js"></script>
-    
+    <script type="module" src="firebaseconffig.js"></script>
+    <script type="module">
+        // Importa las funciones necesarias de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+      </script>
 </body>
 </html>
