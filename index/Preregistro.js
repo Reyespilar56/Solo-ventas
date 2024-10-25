@@ -87,7 +87,11 @@ const defaultUrl = "http://127.0.0.1:5500/index/index.html";
           } else {
             mensaje.innerHTML = 'Venta enviada. ID de cliente generado.';
           }
-    
+     // Mostrar alerta de venta confirmada y recargar la página
+     alert('Venta confirmada');
+     window.location.reload();
+
+
           
         } else {
           console.error('Error:', response.status, response.data);
@@ -257,14 +261,5 @@ anticipoSelect.addEventListener("change", () => {
     } else {
         anticipoAmountDiv.style.display = "none";
     }
-    // Función para cerrar sesión
-function cerrarSesion() {
-  localStorage.clear(); // Elimina todos los datos del almacenamiento local
-  window.location.href = '/login/Login.html'; // Redirige a la página de inicio de sesión
-}
-
-// Asignar la función de cerrar sesión al botón
-const buttonCerrarSesion = document.getElementById('logoutButton');
-buttonCerrarSesion.addEventListener('click', cerrarSesion);
-
+    
 });
