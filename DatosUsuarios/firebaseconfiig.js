@@ -53,8 +53,13 @@ bton.addEventListener("click", async (e) => {
         });
 
         console.log("Documento agregado con ID: ", docRef.id);
-
+        
+        // Alerta de éxito
+        alert("Usuario agregado con éxito!");
     } catch (e) {
         console.error("Error al agregar el documento: ", e);
+        
+        // Alerta de error
+        alert("Error al agregar usuario!");
     }
 });

@@ -1,3 +1,4 @@
+
 var buttonGenerales = document.getElementById('btnCalcularGenerales');
 var buttonUsuario = document.getElementById('btnCalcularUsuario');
 var selectFiltro = document.getElementById('selectTipoBusqueda');
@@ -47,6 +48,7 @@ buttonUsuario.addEventListener('click', function() {
     procesarFormulario(selectFiltro.value);
 });
 
+
 function procesarFormulario(filtroTipo) {
     console.log("botón funcional");
 
@@ -71,59 +73,59 @@ function procesarFormulario(filtroTipo) {
         Valor = fechaValor;
     }
 
-    recibirDatos(Valor, filtroTipo, fechaValor);
+   recibirDatos(Valor, filtroTipo, fechaValor);
 }
-function recibirDatos(Valor, filtroTipo) {
-    console.log("Recibiendo datos");
-    axios.get('http://localhost:3000/Historial', {
-        params: {
-            valor: Valor,
-            filtroTipo: filtroTipo // Enviar filtroTipo al servidor
-        },
-    })
-    .then(function(res) {
-        console.log("Respuesta", res);
-        if (res.status === 200) {
-            // Procesar datos y actualizar la tabla
-            actualizarTabla(res.data);
-        }
-    })
-    .catch(function(err) {
-        console.error(err);
-        alert('No se encontraron datos');
-    });
-}
+// function recibirDatos(Valor, filtroTipo) {
+//     console.log("Recibiendo datos");
+//     axios.get('http://localhost:3000/Historial', {
+//         params: {
+//             valor: Valor,
+//             filtroTipo: filtroTipo // Enviar filtroTipo al servidor
+//         },
+//     })
+//     .then(function(res) {
+//         console.log("Respuesta", res);
+//         if (res.status === 200) {
+//             // Procesar datos y actualizar la tabla
+//             actualizarTabla(res.data);
+//         }
+//     })
+//     .catch(function(err) {
+//         console.error(err);
+//         alert('No se encontraron datos');
+//     });
+// }
 
-function actualizarTabla(data) {
-    // Mostrar la tabla
-    resultTable.style.display = 'table';
+// function actualizarTabla(data) {
+//     // Mostrar la tabla
+//     resultTable.style.display = 'table';
 
-    // Limpiar el cuerpo de la tabla
-    tableBody.innerHTML = '';
+//     // Limpiar el cuerpo de la tabla
+//     tableBody.innerHTML = '';
 
-    if (data.length > 0) {
-        // Iterar sobre los datos y agregar filas a la tabla
-        data.forEach(item => {
-            const row = document.createElement('tr');
+//     if (data.length > 0) {
+//         // Iterar sobre los datos y agregar filas a la tabla
+//         data.forEach(item => {
+//             const row = document.createElement('tr');
 
-            const fields = [
-                'usuario', 'cliente', 'direccion','ubicacion','fecha_instalacion',
-                'telefono','movil', 'email', 'notas'
-            ];
+//             const fields = [
+//                 'usuario', 'cliente', 'direccion','ubicacion','fecha_instalacion',
+//                 'telefono','movil', 'email', 'notas'
+//             ];
 
-            fields.forEach(field => {
-                const cell = document.createElement('td');
-                cell.textContent = item[field] || ''; // Manejo de valores nulos
-                row.appendChild(cell);
-            });
+//             fields.forEach(field => {
+//                 const cell = document.createElement('td');
+//                 cell.textContent = item[field] || ''; // Manejo de valores nulos
+//                 row.appendChild(cell);
+//             });
 
-            tableBody.appendChild(row);
-        });
-        mensaje.textContent = ''; // Limpiar el mensaje si hay datos
-    } else {
-        mensaje.textContent = 'No se encontraron datos.';
-    }
-}
+//             tableBody.appendChild(row);
+//         });
+//         mensaje.textContent = ''; // Limpiar el mensaje si hay datos
+//     } else {
+//         mensaje.textContent = 'No se encontraron datos.';
+//     }
+//}
 var buttonGenerales = document.getElementById('btnCalcularGenerales');
 var buttonUsuario = document.getElementById('btnCalcularUsuario');
 var selectFiltro = document.getElementById('selectTipoBusqueda');
@@ -148,9 +150,7 @@ selectFiltro.addEventListener('change', function() {
 
     var filtroTipo = selectFiltro.value;
 
-    if (filtroTipo === 'zona') {
-        divZona.style.display = 'block';
-    } else if (filtroTipo === 'usuario') {
+   if (filtroTipo === 'usuario') {
         divUsuario.style.display = 'block';
     } else if (filtroTipo === 'telefono') {
         divTelefono.style.display = 'block';
@@ -194,54 +194,54 @@ function procesarFormulario(filtroTipo) {
     recibirDatos(Valor, filtroTipo, Fecha);
 }
 
-function recibirDatos(Valor, filtroTipo) {
-    console.log("Recibiendo datos");
-    axios.get('https://ventas-cambaceo-back.vercel.app/Historial', {
-        params: {
-            valor: Valor,
-            filtroTipo: filtroTipo // Enviar filtroTipo al servidor
-        },
-    })
-    .then(function(res) {
-        console.log("Respuesta", res);
-        if (res.status === 200) {
-            // Procesar datos y actualizar la tabla
-            actualizarTabla(res.data);
-        }
-    })
-    .catch(function(err) {
-        console.error(err);
-        alert('No se encontraron datos');
-    });
-}
+ function recibirDatos(Valor, filtroTipo) {
+//     console.log("Recibiendo datos");
+//     axios.get('https://ventas-cambaceo-back.vercel.app/Historial', {
+//         params: {
+//             valor: Valor,
+//             filtroTipo: filtroTipo // Enviar filtroTipo al servidor
+//         },
+//     })
+//     .then(function(res) {
+//         console.log("Respuesta", res);
+//         if (res.status === 200) {
+//             // Procesar datos y actualizar la tabla
+//             actualizarTabla(res.data);
+//         }
+//     })
+//     .catch(function(err) {
+//         console.error(err);
+//         alert('No se encontraron datos');
+//     });
+// }
 
-function actualizarTabla(data) {
-    // Mostrar la tabla
-    resultTable.style.display = 'table';
+// function actualizarTabla(data) {
+//     // Mostrar la tabla
+//     resultTable.style.display = 'table';
 
-    // Limpiar el cuerpo de la tabla
-    tableBody.innerHTML = '';
+//     // Limpiar el cuerpo de la tabla
+//     tableBody.innerHTML = '';
 
-    if (data.length > 0) {
-        // Iterar sobre los datos y agregar filas a la tabla
-        data.forEach(item => {
-            const row = document.createElement('tr');
+//     if (data.length > 0) {
+//         // Iterar sobre los datos y agregar filas a la tabla
+//         data.forEach(item => {
+//             const row = document.createElement('tr');
 
-            const fields = [
-                'usuario', 'cliente', 'direccion','ubicacion','fecha_instalacion',
-                'telefono','movil', 'email', 'notas'
-            ];
+//             const fields = [
+//                 'usuario', 'cliente', 'direccion','ubicacion','fecha_instalacion',
+//                 'telefono','movil', 'email', 'notas'
+//             ];
 
-            fields.forEach(field => {
-                const cell = document.createElement('td');
-                cell.textContent = item[field] || ''; // Manejo de valores nulos
-                row.appendChild(cell);
-            });
+//             fields.forEach(field => {
+//                 const cell = document.createElement('td');
+//                 cell.textContent = item[field] || ''; // Manejo de valores nulos
+//                 row.appendChild(cell);
+//             });
 
-            tableBody.appendChild(row);
-        });
-        mensaje.textContent = ''; // Limpiar el mensaje si hay datos
-    } else {
-        mensaje.textContent = 'No se encontraron datos.';
-    }
-}
+//             tableBody.appendChild(row);
+//         });
+//         mensaje.textContent = ''; // Limpiar el mensaje si hay datos
+//     } else {
+//         mensaje.textContent = 'No se encontraron datos.';
+//     }
+ }
