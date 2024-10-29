@@ -81,7 +81,7 @@ function mostrarResultados(resultados) {
   resultados.forEach(venta => {
     const row = document.createElement('tr');
     row.innerHTML = `
-           <td>${venta.cliente}</td>
+        <td>${venta.cliente}</td>
             <td>${venta.Calle}</td>
             <td>${venta.ubicacion}</td>
             <td>${venta.fecha_instalacion}</td>

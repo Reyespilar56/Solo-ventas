@@ -78,3 +78,29 @@ bton.addEventListener("click", async (e) => {
       mostrarMensaje("Error al agregar usuario!", 'error');
   }
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("validate.datos");
+  const mensaje = document.getElementById("mensaje");
+
+  form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Evita el envío del formulario
+
+      // Obtén los valores de los campos
+      const usuario = document.getElementById("usuario").value;
+      const contrasena = document.getElementById("contrasena").value;
+
+      // Limpia el mensaje antes de validar
+      mensaje.textContent = "";
+
+      // Valida las credenciales
+      if (usuario === "admin" && contrasena === "admin") { // Cambia las credenciales según necesites
+          // Si son correctas, redirige a otra página
+          localStorage.setItem("auth", usuario); // Guarda el usuario en localStorage
+          window.location.href = "/master/master.html"; // Cambia esto a la URL de tu página de destino
+      } else {
+          // Si no son correctas, muestra un mensaje
+          mensaje.textContent = "Usuario o contraseña incorrectos.";
+          mensaje.classList.add("text-danger");
+      }
+  });
+});

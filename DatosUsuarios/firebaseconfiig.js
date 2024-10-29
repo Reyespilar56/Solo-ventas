@@ -20,7 +20,13 @@ const db = getFirestore(app);
 
 // Obtener el botón de confirmar y el formulario
 const bton = document.getElementById('bton');
-const formulario = document.getElementById("miFormulario");
+const mensaje = document.getElementById('mensaje'); // Obtener el elemento para mostrar mensajes
+
+// Función para mostrar mensajes en el elemento de mensaje
+function mostrarMensaje(texto) {
+    mensaje.textContent = texto; // Cambia el contenido del elemento de mensaje
+    console.log(texto); // También muestra el mensaje en la consola
+}
 
 // Manejar el clic en el botón de confirmar
 bton.addEventListener("click", async (e) => {
@@ -29,12 +35,18 @@ bton.addEventListener("click", async (e) => {
     // Obtener los campos del formulario
     var Nombre = document.getElementById('Nombre').value;
     var correoElectronico = document.getElementById('correoElectronico').value;
-    var Telefono = document.getElementById('Telefono').value;
+  
     var TelefonoMovil = document.getElementById('TelefonoMovil').value;
-    var Direccion = document.getElementById('Direccion').value;
+    
     var usuario = document.getElementById("usuario").value;
     var contrasena = document.getElementById('contrasena').value;
     var confirmarContrasena = document.getElementById('confirmarContrasena').value;
+
+    // Validar que todos los campos requeridos estén llenos
+    if (!Nombre || !correoElectronico ||  !TelefonoMovil|| !usuario || !contrasena || !confirmarContrasena) {
+        mostrarMensaje("Por favor, completa todos los campos."); // Mensaje de error
+        return; // Detener la ejecución si hay campos vacíos
+    }
 
     // Encriptar la contraseña con CryptoJS (SHA-256)
     var hashedPassword = CryptoJS.SHA256(contrasena).toString();
@@ -42,24 +54,24 @@ bton.addEventListener("click", async (e) => {
     try {
         // Agregar el documento a la colección "usuarios"
         const docRef = await addDoc(collection(db, "usuarios"), {
-          Direccion: Direccion,
+       
           Usuario: usuario,
           Nombre: Nombre,
           email: correoElectronico,
           movil: TelefonoMovil,
-          telefono: Telefono,
+         
           contraseña: hashedPassword, // Guardar la contraseña hasheada
           Contraseñaconfirmada: confirmarContrasena
         });
 
         console.log("Documento agregado con ID: ", docRef.id);
         
-        // Alerta de éxito
-        alert("Usuario agregado con éxito!");
+        // Mensaje de éxito
+        mostrarMensaje("Usuario agregado con éxito!");
     } catch (e) {
         console.error("Error al agregar el documento: ", e);
         
-        // Alerta de error
-        alert("Error al agregar usuario!");
+        // Mensaje de error
+        mostrarMensaje("Error al agregar usuario!");
     }
 });
