@@ -1,94 +1,143 @@
-// Obtiene el elemento del botón y de mensaje por su ID
-var bton = document.getElementById('bton');
-var mensaje = document.getElementById('mensaje');
 
-// Función para mostrar mensajes en el elemento mensaje
-function mostrarMensaje(texto) {
-  mensaje.textContent = texto; // Muestra el mensaje de texto
-  mensaje.style.display = 'block'; // Asegúrate de que el elemento esté visible
-}
+// // Importar Firebase y Firestore
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-// Agrega un event listener al botón que escucha el evento 'click'
-bton.addEventListener('click', function() {
-  console.log("boton funcional"); // Muestra en la consola que el botón es funcional
+// Configuración de Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyBJHnr-Hc_dt-F85UjYqcEHfrPWSQfdips",
+  authDomain: "ventas-e21f2.firebaseapp.com",
+  projectId: "ventas-e21f2",
+  storageBucket: "ventas-e21f2.appspot.com",
+  messagingSenderId: "714192701317",
+  appId: "1:714192701317:web:46cc73ccce5af60e0d26ec"
+};
+// Inicializar Firebase y Firestore
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  // Obtiene los valores de los campos del formulario por su ID
-  var Nombre = document.getElementById('Nombre').value;
-  var correoElectronico = document.getElementById('correoElectronico').value;
-  var Telefono = document.getElementById('Telefono').value;
-  var TelefonoMovil = document.getElementById('TelefonoMovil').value;
-  var Direccion = document.getElementById('Direccion').value;
-  var usuario = document.getElementById("usuario").value;
-  var contrasena = document.getElementById('contrasena').value;
-  var confirmarContrasena = document.getElementById('confirmarContrasena').value;
+// Referencia a los elementos del DOM
+const selectTipoBusqueda = document.getElementById('selectTipoBusqueda');
+const divZona = document.getElementById('divZona');
+const divUsuario = document.getElementById('divUsuario');
+const divTelefono = document.getElementById('divTelefono');
+const divCliente = document.getElementById('divCliente');
+const divFecha = document.getElementById('divFecha');
+const btnCalcularUsuario = document.getElementById('btnCalcularUsuario');
+const btnCalcularGenerales = document.getElementById('btnCalcularGenerales');
+const resultTableBody = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+const mensaje = document.getElementById('mensaje');
 
-  // Genera un ID aleatorio para el usuario maximo de 150 
-  var usuarioId = 'id-' + Math.floor(Math.random() * 150);
+// Mostrar el campo de búsqueda adecuado según el tipo seleccionado
+selectTipoBusqueda.addEventListener('change', () => {
+  divZona.style.display = 'none';
+  divUsuario.style.display = 'none';
+  divTelefono.style.display = 'none';
+  divCliente.style.display = 'none';
+  divFecha.style.display = 'none';
 
-  // Muestra en la consola los datos obtenidos del formulario junto con el ID generado
-  console.log("datos", usuarioId, Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena);
-
-  // Valida el formulario y si es válido, envía la solicitud
-  if (validarFormulario(Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena, confirmarContrasena)) {
-    console.log("Validacion"); // Muestra en la consola que la validación fue exitosa
-    enviarSolicitud(usuarioId, Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena);
-  } 
+  const tipo = selectTipoBusqueda.value;
+  if (tipo === 'zona') divZona.style.display = 'block';
+  if (tipo === 'usuario') divUsuario.style.display = 'block';
+  if (tipo === 'telefono') divTelefono.style.display = 'block';
+  if (tipo === 'cliente') divCliente.style.display = 'block';
+  if (tipo === 'fecha') divFecha.style.display = 'block';
 });
 
-// Función para validar los datos del formulario
-function validarFormulario(nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena, confirmarContrasena) {
-  // Expresión regular para validar el formato del correo electrónico
-  var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Función para realizar la búsqueda por usuario
+btnCalcularUsuario.addEventListener('click', async () => {
+  const tipoBusqueda = selectTipoBusqueda.value;
+  let valorBusqueda = '';
 
-  // Valida que el correo electrónico no esté vacío y tenga un formato válido
-  if (!correoElectronico || !regexCorreo.test(correoElectronico)) {
-    mostrarMensaje('Por favor, ingrese un correo electrónico válido.');
-    return false;
-  }
-  
-  // Valida que la contraseña no esté vacía
-  if (!contrasena) {
-    mostrarMensaje('Por favor, ingrese una contraseña válida.');
-    return false;
-  }
+  if (tipoBusqueda === 'zona') valorBusqueda = document.getElementById('valorZona').value;
+  if (tipoBusqueda === 'usuario') valorBusqueda = document.getElementById('valorUsuario').value;
+  if (tipoBusqueda === 'telefono') valorBusqueda = document.getElementById('valorTelefono').value;
+  if (tipoBusqueda === 'cliente') valorBusqueda = document.getElementById('valorCliente').value;
+  if (tipoBusqueda === 'fecha') valorBusqueda = document.getElementById('valorFecha').value;
 
-  // Valida que las contraseñas coincidan
-  if (contrasena !== confirmarContrasena) {
-    mostrarMensaje('Las contraseñas no coinciden.');
-    return false;
+  try {
+    const resultados = await buscarVentasPorTipo(tipoBusqueda, valorBusqueda);
+    mostrarResultados(resultados);
+  } catch (error) {
+    mensaje.innerText = 'Error al buscar ventas: ' + error.message;
   }
+});
 
-  // Si todas las validaciones pasan, retorna verdadero
-  return true;
+// Función para calcular las ventas generales
+btnCalcularGenerales.addEventListener('click', async () => {
+  try {
+    const resultados = await obtenerVentasGenerales();
+    mostrarResultados(resultados);
+  } catch (error) {
+    mensaje.innerText = 'Error al calcular ventas generales: ' + error.message;
+  }
+});
+
+// Función para mostrar los resultados en la tabla
+function mostrarResultados(resultados) {
+  resultTableBody.innerHTML = '';
+//  <td>${venta.usuario}</td> 
+     // <td>${venta.ID_venta}</td>  
+  resultados.forEach(venta => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+           <td>${venta.cliente}</td>
+            <td>${venta.Calle}</td>
+            <td>${venta.ubicacion}</td>
+            <td>${venta.fecha_instalacion}</td>
+            <td>${venta.telefono}</td>
+            <td>${venta.telefonoMovil}</td>
+            <td>${venta.email}</td>
+           <td>${venta.anticipo}</td>
+           <td>${venta.notas}</td>
+        `;
+    resultTableBody.appendChild(row);
+  });
 }
 
-// Función para enviar la solicitud al servidor usando axios
-function enviarSolicitud(usuarioId, Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena) {
-  console.log("solicitud enviada"); // Muestra en la consola que la solicitud fue enviada
+// Función para buscar ventas por tipo en Firestore
+async function buscarVentasPorTipo(tipo, valor) {
+  const ventasRef = collection(db, 'ventas');
+  let q;
 
-  // Realiza una petición POST al servidor con los datos del usuario y headers personalizados
-  /*axios.post('https://us-central1-ventasdigy-ce0eb.cloudfunctions.net/addUser', 
-      {
-        "clave": contrasena,
-        "movil": TelefonoMovil,
-        "correo": correoElectronico,
-        "direccion": Direccion,
-        "telefono": Telefono,
-        "usuario": usuario,
-        "nombre": Nombre,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
-    .then(function (response) {
-      console.log("respuesta", response.data); // Muestra la respuesta del servidor en la consola
-      mostrarMensaje('Usuario agregado correctamente. ' + JSON.stringify(response.data)); // Muestra un mensaje de éxito con los datos
-    })
-    .catch(function (error) {
-      console.log(error); // Muestra el error en la consola si la petición falla
-      mostrarMensaje('Hubo un error al registrar al Usuario.'); // Muestra un mensaje de error
-    });*/
+  // Construcción de la consulta basada en el tipo de búsqueda
+  switch (tipo) {
+    case 'zona':
+      q = query(ventasRef, where('zona', '==', valor));
+      break;
+    case 'usuario':
+      q = query(ventasRef, where('usuario', '==', valor));
+      break;
+    case 'telefono':
+      q = query(ventasRef, where('telefono', '==', valor));
+      break;
+    case 'cliente':
+      q = query(ventasRef, where('cliente', '==', valor));
+      break;
+    case 'fecha':
+      q = query(ventasRef, where('fechaInstalacion', '==', valor));
+      break;
+    default:
+      throw new Error('Tipo de búsqueda no válido');
+  }
+
+  const querySnapshot = await getDocs(q);
+  const resultados = [];
+  querySnapshot.forEach((doc) => {
+    resultados.push(doc.data());
+  });
+
+  return resultados;
+}
+
+// Función para obtener todas las ventas generales
+async function obtenerVentasGenerales() {
+  const ventasRef = collection(db, 'ventas');
+  const querySnapshot = await getDocs(ventasRef);
+  const resultados = [];
+  querySnapshot.forEach((doc) => {
+    resultados.push(doc.data());
+  });
+
+  return resultados;
 }

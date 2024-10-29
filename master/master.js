@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const contrasena = document.getElementById("contrasena").value;
   
       // Valida las credenciales
-      if (usuario === "coorporativo" && contrasena === "123") { // preguntar que usuario y contraseña ocupar 
+      if (usuario === "admin" && contrasena === "admin") { // preguntar que usuario y contraseña ocupar 
         // Si son correctas, redirige a otra página
         window.location.href = "/admin/administradores.html"; // Cambia esto a la URL de tu página de destino
       } else {
