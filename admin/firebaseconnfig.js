@@ -21,45 +21,60 @@ const db = getFirestore(app);
 // Obtener el botón de confirmar y el formulario
 const bton = document.getElementById('bton');
 const formulario = document.getElementById("miFormulario");
+const mensaje = document.getElementById("mensaje");
+
+// Función para mostrar mensajes en el elemento mensaje
+function mostrarMensaje(texto, tipo = 'success') {
+  mensaje.textContent = texto; // Establece el texto del mensaje
+  mensaje.style.padding = '10px';
+  mensaje.style.borderRadius = '5px';
+  mensaje.style.marginTop = '10px';
+
+  if (tipo === 'error') {
+    mensaje.style.color = 'red';
+    mensaje.style.backgroundColor = '#f8d7da';
+    mensaje.style.border = '1px solid red';
+  } else {
+    mensaje.style.color = 'green';
+    mensaje.style.backgroundColor = '#d4edda';
+    mensaje.style.border = '1px solid green';
+  }
+}
 
 // Manejar el clic en el botón de confirmar
 bton.addEventListener("click", async (e) => {
-    e.preventDefault(); // Evitar que el botón dispare el envío del formulario
+  e.preventDefault();
 
-    // Obtener los campos del formulario
-    var Nombre = document.getElementById('Nombre').value;
-    var correoElectronico = document.getElementById('correoElectronico').value;
-   
-    var TelefonoMovil = document.getElementById('TelefonoMovil').value;
+  // Obtener los campos del formulario
+  var Nombre = document.getElementById('Nombre').value;
+  var correoElectronico = document.getElementById('correoElectronico').value;
+  var TelefonoMovil = document.getElementById('TelefonoMovil').value;
+  var usuario = document.getElementById("usuario").value;
+  var contrasena = document.getElementById('contrasena').value;
+  var confirmarContrasena = document.getElementById('confirmarContrasena').value;
 
-    var usuario = document.getElementById("usuario").value;
-    var contrasena = document.getElementById('contrasena').value;
-    var confirmarContrasena = document.getElementById('confirmarContrasena').value;
+  // Validar el formulario
+  if (!validarFormulario(Nombre, correoElectronico, TelefonoMovil, usuario, contrasena, confirmarContrasena)) {
+      return; // Detener el proceso si la validación falla
+  }
 
-    // Encriptar la contraseña con CryptoJS (SHA-256)
-    var hashedPassword = CryptoJS.SHA256(contrasena).toString();
+  // Encriptar la contraseña
+  var hashedPassword = CryptoJS.SHA256(contrasena).toString();
 
-    try {
-        // Agregar el documento a la colección "usuarios"
-        const docRef = await addDoc(collection(db, "administradores"), {
-          
+  try {
+      // Agregar el documento a la colección "administradores"
+      const docRef = await addDoc(collection(db, "administradores"), {
           Usuario: usuario,
           Nombre: Nombre,
           email: correoElectronico,
           movil: TelefonoMovil,
-          
-          contraseña: hashedPassword, // Guardar la contraseña hasheada
-          Contraseñaconfirmada: confirmarContrasena
-        });
+          contraseña: hashedPassword
+      });
 
-        console.log("Documento agregado con ID: ", docRef.id);
-        
-        // Alerta de éxito
-        alert("Usuario agregado con éxito!");
-    } catch (e) {
-        console.error("Error al agregar el documento: ", e);
-        
-        // Alerta de error
-        alert("Error al agregar usuario!");
-    }
+      console.log("Documento agregado con ID: ", docRef.id);
+      mostrarMensaje("Usuario agregado con éxito!");
+  } catch (e) {
+      console.error("Error al agregar el documento: ", e);
+      mostrarMensaje("Error al agregar usuario!", 'error');
+  }
 });
