@@ -15,6 +15,38 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Función para mostrar el mensaje de error en el centro de la página
+function mostrarMensajeError(mensaje) {
+  let mensajeError = document.getElementById('mensajeError');
+
+  if (!mensajeError) {
+    mensajeError = document.createElement('div');
+    mensajeError.id = 'mensajeError';
+
+    // Estilos para centrar el mensaje de error
+    mensajeError.style.position = 'fixed'; // Cambiado a 'fixed' para mejor responsividad
+    mensajeError.style.top = '65%';
+    mensajeError.style.left = '50%';
+    mensajeError.style.transform = 'translate(-50%, -50%)';
+    mensajeError.style.color = 'red';
+    mensajeError.style.padding = '15px'; // Padding para mejor presentación
+    mensajeError.style.border = '1px solid red'; // Bordes para mejor visibilidad
+    mensajeError.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'; // Fondo semi-transparente
+    mensajeError.style.borderRadius = '5px'; // Bordes redondeados
+    //mensajeError.style.zIndex = '1000'; // Asegura que esté por encima de otros elementos
+
+    // Estilos responsivos
+    mensajeError.style.maxWidth = '90vw'; // Limitar el ancho en pantallas pequeñas
+    mensajeError.style.width = '300px'; // Ancho fijo para pantallas más grandes
+    mensajeError.style.textAlign = 'center'; // Centrar el texto
+    mensajeError.style.wordWrap = 'break-word'; // Permitir que las palabras largas se dividan
+
+    document.body.appendChild(mensajeError); // Añadir el mensaje al final del cuerpo de la página
+  }
+
+  mensajeError.textContent = mensaje;
+}
+
 // Función para validar usuario y contraseña
 async function validarCredenciales(usuarioIngresado, contrasenaIngresada) {
   const q = query(collection(db, "usuarios"), where("Usuario", "==", usuarioIngresado));
@@ -23,8 +55,8 @@ async function validarCredenciales(usuarioIngresado, contrasenaIngresada) {
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
-      console.log("El usuario no existe.");
-      return false;  // Usuario no encontrado
+      mostrarMensajeError("El usuario no existe.");
+      return false;
     }
 
     let esValido = false;
@@ -34,9 +66,9 @@ async function validarCredenciales(usuarioIngresado, contrasenaIngresada) {
 
       if (datosUsuario.contraseña === hashedPasswordIngresada) {
         esValido = true;
-        console.log("Inicio de sesión exitoso.");
+        mostrarMensajeError(""); // Limpiar mensaje si es correcto
       } else {
-        console.log("Contraseña incorrecta.");
+        mostrarMensajeError("Contraseña incorrecta."); // Mensaje de contraseña incorrecta
       }
     });
 
@@ -44,7 +76,8 @@ async function validarCredenciales(usuarioIngresado, contrasenaIngresada) {
 
   } catch (error) {
     console.error("Error al validar las credenciales: ", error);
-    return false;  // Error en la validación
+    mostrarMensajeError("Ocurrió un error al validar las credenciales.");
+    return false;
   }
 }
 
@@ -59,8 +92,7 @@ button.addEventListener("click", async (e) => {
   const esValido = await validarCredenciales(usuarioIngresado, contrasenaIngresada);
 
   if (esValido) {
-  
     localStorage.setItem("auth", usuarioIngresado);
     window.location.href = '/index/index.html'; // Redirige si las credenciales son válidas
-  } 
+  }
 });

@@ -1,247 +1,94 @@
-
-var buttonGenerales = document.getElementById('btnCalcularGenerales');
-var buttonUsuario = document.getElementById('btnCalcularUsuario');
-var selectFiltro = document.getElementById('selectTipoBusqueda');
+// Obtiene el elemento del botón y de mensaje por su ID
+var bton = document.getElementById('bton');
 var mensaje = document.getElementById('mensaje');
-var resultTable = document.getElementById('resultTable');
-var tableBody = resultTable.querySelector('tbody');
 
-// Elementos de los campos de búsqueda
-var divZona = document.getElementById('divZona');
-var divUsuario = document.getElementById('divUsuario');
-var divTelefono = document.getElementById('divTelefono');
-var divCliente = document.getElementById('divCliente');
-var divFecha = document.getElementById('divFecha');
-
-// Lógica para mostrar/ocultar campos según el filtro seleccionado
-selectFiltro.addEventListener('change', function() {
-    divZona.style.display = 'none';
-    divUsuario.style.display = 'none';
-    divTelefono.style.display = 'none';
-    divCliente.style.display = 'none';
-    divFecha.style.display = 'none';
-
-    var filtroTipo = selectFiltro.value;
-
-    if (filtroTipo === 'zona') {
-        divZona.style.display = 'block';
-    } else if (filtroTipo === 'usuario') {
-        divUsuario.style.display = 'block';
-    } else if (filtroTipo === 'telefono') {
-        divTelefono.style.display = 'block';
-    } else if (filtroTipo === 'cliente') {
-        divCliente.style.display = 'block';
-    } else if (filtroTipo === 'fecha') {
-        divFecha.style.display = 'block';
-    }
-});
-
-// Inicializar campos visibles
-selectFiltro.dispatchEvent(new Event('change'));
-
-buttonGenerales.addEventListener('click', function() {
-    procesarFormulario('generales');
-});
-
-buttonUsuario.addEventListener('click', function() {
-    console.log('FILTRO', selectFiltro.value);
-    procesarFormulario(selectFiltro.value);
-});
-
-
-function procesarFormulario(filtroTipo) {
-    console.log("botón funcional");
-
-    var Fecha = document.getElementById("Fecha");
-    if (Fecha === null) {
-        console.error("El elemento con ID 'Fecha' no existe en el DOM.");
-        return;
-    }
-
-    var fechaValor = Fecha.value;
-    var Valor = "";
-
-    if (filtroTipo === 'zona') {
-        Valor = document.getElementById("valorZona").value;
-    } else if (filtroTipo === 'usuario') {
-        Valor = document.getElementById("valorUsuario").value;
-    } else if (filtroTipo === 'telefono') {
-        Valor = document.getElementById("valorTelefono").value;
-    } else if (filtroTipo === 'cliente') {
-        Valor = document.getElementById("valorCliente").value;
-    } else if (filtroTipo === 'fecha') {
-        Valor = fechaValor;
-    }
-
-   recibirDatos(Valor, filtroTipo, fechaValor);
-}
-// function recibirDatos(Valor, filtroTipo) {
-//     console.log("Recibiendo datos");
-//     axios.get('http://localhost:3000/Historial', {
-//         params: {
-//             valor: Valor,
-//             filtroTipo: filtroTipo // Enviar filtroTipo al servidor
-//         },
-//     })
-//     .then(function(res) {
-//         console.log("Respuesta", res);
-//         if (res.status === 200) {
-//             // Procesar datos y actualizar la tabla
-//             actualizarTabla(res.data);
-//         }
-//     })
-//     .catch(function(err) {
-//         console.error(err);
-//         alert('No se encontraron datos');
-//     });
-// }
-
-// function actualizarTabla(data) {
-//     // Mostrar la tabla
-//     resultTable.style.display = 'table';
-
-//     // Limpiar el cuerpo de la tabla
-//     tableBody.innerHTML = '';
-
-//     if (data.length > 0) {
-//         // Iterar sobre los datos y agregar filas a la tabla
-//         data.forEach(item => {
-//             const row = document.createElement('tr');
-
-//             const fields = [
-//                 'usuario', 'cliente', 'direccion','ubicacion','fecha_instalacion',
-//                 'telefono','movil', 'email', 'notas'
-//             ];
-
-//             fields.forEach(field => {
-//                 const cell = document.createElement('td');
-//                 cell.textContent = item[field] || ''; // Manejo de valores nulos
-//                 row.appendChild(cell);
-//             });
-
-//             tableBody.appendChild(row);
-//         });
-//         mensaje.textContent = ''; // Limpiar el mensaje si hay datos
-//     } else {
-//         mensaje.textContent = 'No se encontraron datos.';
-//     }
-//}
-var buttonGenerales = document.getElementById('btnCalcularGenerales');
-var buttonUsuario = document.getElementById('btnCalcularUsuario');
-var selectFiltro = document.getElementById('selectTipoBusqueda');
-var mensaje = document.getElementById('mensaje');
-var resultTable = document.getElementById('resultTable');
-var tableBody = resultTable.querySelector('tbody');
-
-// Elementos de los campos de búsqueda
-var divZona = document.getElementById('divZona');
-var divUsuario = document.getElementById('divUsuario');
-var divTelefono = document.getElementById('divTelefono');
-var divCliente = document.getElementById('divCliente');
-var divFecha = document.getElementById('divFecha');
-
-// Lógica para mostrar/ocultar campos según el filtro seleccionado
-selectFiltro.addEventListener('change', function() {
-    divZona.style.display = 'none';
-    divUsuario.style.display = 'none';
-    divTelefono.style.display = 'none';
-    divCliente.style.display = 'none';
-    divFecha.style.display = 'none';
-
-    var filtroTipo = selectFiltro.value;
-
-   if (filtroTipo === 'usuario') {
-        divUsuario.style.display = 'block';
-    } else if (filtroTipo === 'telefono') {
-        divTelefono.style.display = 'block';
-    } else if (filtroTipo === 'cliente') {
-        divCliente.style.display = 'block';
-    } else if (filtroTipo === 'fecha') {
-        divFecha.style.display = 'block';
-    }
-});
-
-// Inicializar campos visibles
-selectFiltro.dispatchEvent(new Event('change'));
-
-buttonGenerales.addEventListener('click', function() {
-    procesarFormulario('generales');
-});
-
-buttonUsuario.addEventListener('click', function() {
-    console.log('FILTRO', selectFiltro.value);
-    procesarFormulario(selectFiltro.value);
-});
-
-function procesarFormulario(filtroTipo) {
-    console.log("botón funcional");
-
-    var Fecha = document.getElementById("Fecha");
-    var Valor = "";
-
-    if (filtroTipo === 'zona') {
-        Valor = document.getElementById("valorZona").value;
-    } else if (filtroTipo === 'usuario') {
-        Valor = document.getElementById("valorUsuario").value;
-    } else if (filtroTipo === 'telefono') {
-        Valor = document.getElementById("valorTelefono").value;
-    } else if (filtroTipo === 'cliente') {
-        Valor = document.getElementById("valorCliente").value;
-    } else if (filtroTipo === 'fecha') {
-        Valor = Fecha;
-    }
-
-    recibirDatos(Valor, filtroTipo, Fecha);
+// Función para mostrar mensajes en el elemento mensaje
+function mostrarMensaje(texto) {
+  mensaje.textContent = texto; // Muestra el mensaje de texto
+  mensaje.style.display = 'block'; // Asegúrate de que el elemento esté visible
 }
 
- function recibirDatos(Valor, filtroTipo) {
-//     console.log("Recibiendo datos");
-//     axios.get('https://ventas-cambaceo-back.vercel.app/Historial', {
-//         params: {
-//             valor: Valor,
-//             filtroTipo: filtroTipo // Enviar filtroTipo al servidor
-//         },
-//     })
-//     .then(function(res) {
-//         console.log("Respuesta", res);
-//         if (res.status === 200) {
-//             // Procesar datos y actualizar la tabla
-//             actualizarTabla(res.data);
-//         }
-//     })
-//     .catch(function(err) {
-//         console.error(err);
-//         alert('No se encontraron datos');
-//     });
-// }
+// Agrega un event listener al botón que escucha el evento 'click'
+bton.addEventListener('click', function() {
+  console.log("boton funcional"); // Muestra en la consola que el botón es funcional
 
-// function actualizarTabla(data) {
-//     // Mostrar la tabla
-//     resultTable.style.display = 'table';
+  // Obtiene los valores de los campos del formulario por su ID
+  var Nombre = document.getElementById('Nombre').value;
+  var correoElectronico = document.getElementById('correoElectronico').value;
+  var Telefono = document.getElementById('Telefono').value;
+  var TelefonoMovil = document.getElementById('TelefonoMovil').value;
+  var Direccion = document.getElementById('Direccion').value;
+  var usuario = document.getElementById("usuario").value;
+  var contrasena = document.getElementById('contrasena').value;
+  var confirmarContrasena = document.getElementById('confirmarContrasena').value;
 
-//     // Limpiar el cuerpo de la tabla
-//     tableBody.innerHTML = '';
+  // Genera un ID aleatorio para el usuario maximo de 150 
+  var usuarioId = 'id-' + Math.floor(Math.random() * 150);
 
-//     if (data.length > 0) {
-//         // Iterar sobre los datos y agregar filas a la tabla
-//         data.forEach(item => {
-//             const row = document.createElement('tr');
+  // Muestra en la consola los datos obtenidos del formulario junto con el ID generado
+  console.log("datos", usuarioId, Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena);
 
-//             const fields = [
-//                 'usuario', 'cliente', 'direccion','ubicacion','fecha_instalacion',
-//                 'telefono','movil', 'email', 'notas'
-//             ];
+  // Valida el formulario y si es válido, envía la solicitud
+  if (validarFormulario(Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena, confirmarContrasena)) {
+    console.log("Validacion"); // Muestra en la consola que la validación fue exitosa
+    enviarSolicitud(usuarioId, Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena);
+  } 
+});
 
-//             fields.forEach(field => {
-//                 const cell = document.createElement('td');
-//                 cell.textContent = item[field] || ''; // Manejo de valores nulos
-//                 row.appendChild(cell);
-//             });
+// Función para validar los datos del formulario
+function validarFormulario(nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena, confirmarContrasena) {
+  // Expresión regular para validar el formato del correo electrónico
+  var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-//             tableBody.appendChild(row);
-//         });
-//         mensaje.textContent = ''; // Limpiar el mensaje si hay datos
-//     } else {
-//         mensaje.textContent = 'No se encontraron datos.';
-//     }
- }
+  // Valida que el correo electrónico no esté vacío y tenga un formato válido
+  if (!correoElectronico || !regexCorreo.test(correoElectronico)) {
+    mostrarMensaje('Por favor, ingrese un correo electrónico válido.');
+    return false;
+  }
+  
+  // Valida que la contraseña no esté vacía
+  if (!contrasena) {
+    mostrarMensaje('Por favor, ingrese una contraseña válida.');
+    return false;
+  }
+
+  // Valida que las contraseñas coincidan
+  if (contrasena !== confirmarContrasena) {
+    mostrarMensaje('Las contraseñas no coinciden.');
+    return false;
+  }
+
+  // Si todas las validaciones pasan, retorna verdadero
+  return true;
+}
+
+// Función para enviar la solicitud al servidor usando axios
+function enviarSolicitud(usuarioId, Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena) {
+  console.log("solicitud enviada"); // Muestra en la consola que la solicitud fue enviada
+
+  // Realiza una petición POST al servidor con los datos del usuario y headers personalizados
+  /*axios.post('https://us-central1-ventasdigy-ce0eb.cloudfunctions.net/addUser', 
+      {
+        "clave": contrasena,
+        "movil": TelefonoMovil,
+        "correo": correoElectronico,
+        "direccion": Direccion,
+        "telefono": Telefono,
+        "usuario": usuario,
+        "nombre": Nombre,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+    )
+    .then(function (response) {
+      console.log("respuesta", response.data); // Muestra la respuesta del servidor en la consola
+      mostrarMensaje('Usuario agregado correctamente. ' + JSON.stringify(response.data)); // Muestra un mensaje de éxito con los datos
+    })
+    .catch(function (error) {
+      console.log(error); // Muestra el error en la consola si la petición falla
+      mostrarMensaje('Hubo un error al registrar al Usuario.'); // Muestra un mensaje de error
+    });*/
+}
