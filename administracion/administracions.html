@@ -65,4 +65,21 @@
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<script>
+// auth.js
+function verificarAutenticacion() {
+    const usuarioAutenticado = localStorage.getItem("auth");
+
+    if (!usuarioAutenticado) {
+        // Si no hay autenticación, redirige al login
+        window.location.href = "/log.admin/loginadd.html";
+    }
+}
+
+// Ejecuta la función de verificación solo cuando se carga la página
+window.addEventListener("DOMContentLoaded", verificarAutenticacion);
+
+
+</script>
 </html>

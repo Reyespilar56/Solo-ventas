@@ -24,24 +24,22 @@ function mostrarMensajeError(mensaje) {
     mensajeError.id = 'mensajeError';
 
     // Estilos para centrar el mensaje de error
-    mensajeError.style.position = 'fixed'; // Cambiado a 'fixed' para mejor responsividad
+    mensajeError.style.position = 'fixed';
     mensajeError.style.top = '65%';
     mensajeError.style.left = '50%';
     mensajeError.style.transform = 'translate(-50%, -50%)';
     mensajeError.style.color = 'red';
-    mensajeError.style.padding = '15px'; // Padding para mejor presentación
-    mensajeError.style.border = '1px solid red'; // Bordes para mejor visibilidad
-    mensajeError.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'; // Fondo semi-transparente
-    mensajeError.style.borderRadius = '5px'; // Bordes redondeados
-    //mensajeError.style.zIndex = '1000'; // Asegura que esté por encima de otros elementos
+    mensajeError.style.padding = '15px';
+    mensajeError.style.border = '1px solid red';
+    mensajeError.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+    mensajeError.style.borderRadius = '5px';
 
-    // Estilos responsivos
-    mensajeError.style.maxWidth = '90vw'; // Limitar el ancho en pantallas pequeñas
-    mensajeError.style.width = '300px'; // Ancho fijo para pantallas más grandes
-    mensajeError.style.textAlign = 'center'; // Centrar el texto
-    mensajeError.style.wordWrap = 'break-word'; // Permitir que las palabras largas se dividan
+    mensajeError.style.maxWidth = '90vw';
+    mensajeError.style.width = '300px';
+    mensajeError.style.textAlign = 'center';
+    mensajeError.style.wordWrap = 'break-word';
 
-    document.body.appendChild(mensajeError); // Añadir el mensaje al final del cuerpo de la página
+    document.body.appendChild(mensajeError);
   }
 
   mensajeError.textContent = mensaje;
@@ -68,7 +66,7 @@ async function validarCredenciales(usuarioIngresado, contrasenaIngresada) {
         esValido = true;
         mostrarMensajeError(""); // Limpiar mensaje si es correcto
       } else {
-        mostrarMensajeError("Contraseña incorrecta."); // Mensaje de contraseña incorrecta
+        mostrarMensajeError("Contraseña incorrecta.");
       }
     });
 
@@ -81,18 +79,20 @@ async function validarCredenciales(usuarioIngresado, contrasenaIngresada) {
   }
 }
 
-// Ejemplo de uso
-const button = document.getElementById('json_post');
-button.addEventListener("click", async (e) => {
-  e.preventDefault(); // Evitar recarga de página
+// login.js
+document.getElementById("json_post").addEventListener("click", async (e) => {
+  e.preventDefault();
 
   const usuarioIngresado = document.getElementById('usuario').value;
   const contrasenaIngresada = document.getElementById('contrasena').value;
 
+  // Validación de credenciales
   const esValido = await validarCredenciales(usuarioIngresado, contrasenaIngresada);
 
   if (esValido) {
-    localStorage.setItem("auth", usuarioIngresado);
-    window.location.href = '/administracion/administracions.html'; // Redirige si las credenciales son válidas
+      localStorage.setItem("auth", usuarioIngresado); // Marca al usuario como autenticado
+      window.location.href = '/administracion/administracions.html'; // Redirige a la página de administración
+  } else {
+      mostrarMensajeError("Credenciales no válidas"); // Muestra el mensaje de error
   }
 });
