@@ -25,15 +25,15 @@
             <div class="form-group">
                 <label for="selectTipoBusqueda">Seleccionar tipo de búsqueda:</label>
                 <select class="form-control" id="selectTipoBusqueda">
-                    <option value="zona">Zona</option>
-                    <option value="usuario">Usuario</option>
+                    <!-- <option value="zona">Zona</option>
+                    <option value="usuario">Usuario</option> -->
                     <option value="telefono">Número Telefónico</option>
                     <option value="cliente">Nombre de Cliente</option>
                     <option value="fecha">Fecha</option>
                 </select>
             </div>
             
-            <div class="form-group" id="divZona">
+            <!-- <div class="form-group" id="divZona">
                 <label for="valorZona">Zona:</label>
                 <input type="text" class="form-control" id="valorZona" placeholder="Ingresa la zona">
             </div>
@@ -42,7 +42,7 @@
                 <label for="valorUsuario">Usuario:</label>
                 <input type="text" class="form-control" id="valorUsuario" placeholder="Ingresa el nombre de usuario">
             </div>
-            
+             -->
             <div class="form-group" id="divTelefono">
                 <label for="valorTelefono">Número Telefónico:</label>
                 <input type="text" class="form-control" id="valorTelefono" placeholder="Ingresa el número telefónico">
@@ -77,15 +77,18 @@
                 <thead>
                     <h1>RESULTADOS</h1>
                     <tr>
-                        <th>Usuario</th>
+                        <!-- <th>Usuario</th> -->
                         <th>Cliente</th>
-                        <th>Dirección</th>
+                        <th>Domicilio</th>
                         <th>Ubicación</th>
                         <th>Fecha de Instalación</th>
                         <th>Teléfono Casa</th>
                         <th>Teléfono Móvil</th>
                         <th>Correo Electrónico</th>
+                        <!-- <th>id_venta</th> -->
+                        <th>Anticipo</th>
                         <th>Notas</th>
+                    
                     </tr>
                 </thead>
                 <tbody>
@@ -100,7 +103,7 @@
     </div>
   
     <!-- Scripts -->
-    <script src="PeticionesV.js"></script>
+    <script type="module" src="PeticionesV.js"></script>
     <!-- jQuery (necesario para Bootstrap JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap JS -->

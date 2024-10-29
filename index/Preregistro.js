@@ -227,4 +227,3 @@ document.addEventListener('DOMContentLoaded', function () {
   
 
 // inputNombre.js
-export const inputNombre = document.getElementById('nombre');
