@@ -72,10 +72,10 @@ bton.addEventListener("click", async (e) => {
       });
 
       console.log("Documento agregado con ID: ", docRef.id);
-      mostrarMensaje("Usuario agregado con éxito!");
+      mostrarMensaje("Administrador agregado con éxito!");
   } catch (e) {
       console.error("Error al agregar el documento: ", e);
-      mostrarMensaje("Error al agregar usuario!", 'error');
+      mostrarMensaje("Error al agregar Administrador!", 'error');
   }
 });
 document.addEventListener("DOMContentLoaded", function () {
