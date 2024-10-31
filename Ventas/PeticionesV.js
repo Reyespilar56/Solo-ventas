@@ -21,6 +21,7 @@ const selectTipoBusqueda = document.getElementById('selectTipoBusqueda');
 const divZona = document.getElementById('divZona');
 const divUsuario = document.getElementById('divUsuario');
 const divTelefono = document.getElementById('divTelefono');
+
 const divCliente = document.getElementById('divCliente');
 const divFecha = document.getElementById('divFecha');
 const btnCalcularUsuario = document.getElementById('btnCalcularUsuario');
@@ -35,6 +36,7 @@ selectTipoBusqueda.addEventListener('change', () => {
   divTelefono.style.display = 'none';
   divCliente.style.display = 'none';
   divFecha.style.display = 'none';
+
   
 
   const tipo = selectTipoBusqueda.value;
@@ -86,8 +88,8 @@ function mostrarResultados(resultados) {
             <td>${venta.Calle}</td>
             <td>${venta.ubicacion}</td>
             <td>${venta.fecha_instalacion}</td>
-            <td>${venta.telefono}</td>
-            <td>${venta.telefonoMovil}</td>
+            <td>${venta.movil}</td>
+         
             <td>${venta.email}</td>
            <td>${venta.anticipo}</td>
            <td>${venta.notas}</td>
