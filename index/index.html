@@ -22,12 +22,14 @@
 
     <form id="formulario-venta">
       <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre:</label>
-        <input type="text" class="form-control" id="nombre" name="nombre"  placeholder="Nombre Del Cliente"required>
+        <label for="nombre" class="form-label">Nombre: <span style="color: red;">*</span></label>
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre Del Cliente" required>
       </div>
+    </form>
+    
 
     <div class="mb-3">
-      <label for="NUmero Ext" class="form-label">Nombre de la calle :</label>
+      <label for="NUmero Ext" class="form-label">Nombre de la calle : <span style="color: red;">*</span></label>
         <input type="text" class="form-control" id="calle" name="calle" placeholder="Nombre de la calle" required>
     </div>
     
@@ -36,20 +38,20 @@
         <input type="text" class="form-control" id="numeroInt" name="numero" placeholder="Número" required>
     </div>
     <div class="mb-3">
-      <label for="NUmero Ext" class="form-label">Numero Ext:</label>
+      <label for="NUmero Ext" class="form-label">Numero Ext: <span style="color: red;">*</span></label>
       <input type="text" class="form-control" id="numeroExt" name="numero" placeholder="Número" required>
   </div>
 
     <div class="mb-3">
-      <label for="cp" class="form-label">Codigo postal:</label>
+      <label for="cp" class="form-label">Codigo postal: <span style="color: red;">*</span></label>
         <input type="text" class="form-control" id="cp" name="cp" placeholder="Código Postal (C.P.)" required>
     </div>
-    <label for="entreCalles" class="form-label">Entre Calles:</label>
+    <label for="entreCalles" class="form-label">Entre Calles: <span style="color: red;">*</span></label>
     <div class="mb-3">
         <input type="text" class="form-control" id="entreCalles" name="entreCalles" placeholder="Entre qué calle y qué calle" required>
     </div>
     <div class="mb-3">
-      <label for="referencias" class="form-label">Referencias:</label>
+      <label for="referencias" class="form-label">Referencias: <span style="color: red;">*</span></label>
       <input type="text" class="form-control" id="referencias" name="referencias" placeholder="Ej: Color de la casa" required>
   </div>
     
@@ -59,7 +61,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="telefono" class="form-label">Teléfono Móvil:</label>
+        <label for="telefono" class="form-label">Teléfono Móvil:<span style="color: red;">*</span> </label>
         <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Teléfono Móvil" required>
       </div>
 
@@ -75,7 +77,7 @@
 
       <div class="mb-3 d-flex justify-content-between">
         <div class="w-50">
-          <label for="coordenadas" class="form-label">Coordenadas:</label>
+          <label for="coordenadas" class="form-label">Coordenadas: <span style="color: red;">*</span></label>
           <input type="text" class="form-control" id="coordenadas" name="coordenadas" placeholder="Coordenadas" required>
         </div>
         <div class="w-50 d-flex align-items-end">
@@ -85,7 +87,7 @@
 
       <div class="mb-3 d-flex justify-content-between">
         <div class="w-50">
-          <label for="paquete" class="form-label">Paquete:</label>
+          <label for="paquete" class="form-label">Paquete: <span style="color: red;">*</span></label>
           <select id="paquete" name="paquete" class="form-select" required>
             <option value="">Selecciona un paquete</option>
             <option value="paquete basico">Básico</option>
@@ -100,18 +102,18 @@
       <P>Fecha y Horario tentativo de instalación</P>
       <div class="mb-3 d-flex justify-content-between">
         <div class="w-50">
-            <label for="FechaInicio" class="form-label">Fecha de :</label>
+            <label for="FechaInicio" class="form-label">Fecha de :<span style="color: red;">*</span></label>
             <input type="date" id="FechaInicio" name="FechaInicio" class="form-control" required>
         </div>
     
         <div class="w-50">
-            <label for="FechaFin" class="form-label">A:</label>
+            <label for="FechaFin" class="form-label">A: <span style="color: red;">*</span></label>
             <input type="date" id="FechaFin" name="FechaFin" class="form-control" required>
         </div>
       </div>
       <div class="mb-3 d-flex justify-content-between">
         <div class="w-50">
-            <label for="HoraInicio" class="form-label">En Horario de :</label>
+            <label for="HoraInicio" class="form-label">En Horario de : <span style="color: red;">*</span></label>
             <select id="HoraInicio" name="HoraInicio" class="form-select" required>
                 <option value="">Seleccione una hora</option>
                 <option value="09:00">09:00</option>
@@ -130,7 +132,7 @@
         
     
         <div class="w-50">
-            <label for="HoraFin" class="form-label"> A:</label>
+            <label for="HoraFin" class="form-label"> A:<span style="color: red;">*</span></label>
             <select id="HoraFin" name="HoraFin" class="form-select" required>
                 <option value="">Seleccione una hora</option>
                 <option value="09:00">09:00</option>
@@ -151,7 +153,7 @@
 
         <div class="mb-3 d-flex justify-content-between">
       <div class="w-50">
-    <label for="Anticipo" class="form-label">Pagado:</label>
+    <label for="Anticipo" class="form-label">Pagado: <span style="color: red;">*</span></label>
     <select id="Anticipo" name="Anticipo" class="form-select" required>
         <option value="">Anticipo</option>
         <option value="SI">SI</option>
@@ -163,7 +165,7 @@
 
   
 <div id="anticipoAmount" class="w-50" style="display: none;">
-    <label for="anticipoAmountInput" class="form-label">Monto del Anticipo:</label>
+    <label for="anticipoAmountInput" class="form-label">Monto del Anticipo:<span style="color: red;">*</span></label>
     <input type="number" id="anticipoAmountInput" name="anticipoAmountInput" class="form-control" step="">
 
 </div>
@@ -236,10 +238,10 @@
           <p id="mensaje"></p>
       
           <!-- Botón de Confirmación -->
-          <button type="button" id="confirmar" class="btn btn-success">Confirmar</button>
-      
+          <a type="button" id="confirmar" class="btn btn-success">Confirmar</a>
+        </br>
           <!-- Botón de Cancelación -->
-          <button type="button" class="btn btn-danger">Cancelar</button>
+          <a type="button" class="btn btn-danger">Cancelar</a>
         </div>
       </div>
       

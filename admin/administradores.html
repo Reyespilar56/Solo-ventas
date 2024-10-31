@@ -20,12 +20,12 @@
 
     <form action="" method="post" id="registroForm" class="row g-3">
       <div class="col-md-6">
-        <label for="nombre" class="form-label">Nombre completo:</label>
+        <label for="nombre" class="form-label">Nombre completo: <span style="color: red;">*</span></label>
         <input type="text" class="form-control" id="Nombre" name="Nombre" required>
       </div>
 
       <div class="col-md-6">
-        <label for="usuario" class="form-label">Nombre de usuario a ocupar:</label>
+        <label for="usuario" class="form-label">Nombre de usuario a ocupar: <span style="color: red;">*</span></label>
         <input type="text" class="form-control" id="usuario" name="usuario" required>
       </div>
 
@@ -34,11 +34,11 @@
         <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" required>
       </div>
       <div class="col-md-6">
-        <label for="contrasena" class="form-label">Contraseña:</label>
+        <label for="contrasena" class="form-label">Contraseña:<span style="color: red;">*</span></label>
         <input type="password" class="form-control" id="contrasena" name="contrasena" required>
       </div>
       <div class="col-md-6">
-        <label for="confirmarContrasena" class="form-label">Confirmar contraseña:</label>
+        <label for="confirmarContrasena" class="form-label">Confirmar contraseña:<span style="color: red;">*</span></label>
         <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
       </div>
      
@@ -46,17 +46,19 @@
         <label for="TelefonoMovil" class="form-label">Teléfono Móvil:</label>
         <input type="tel" class="form-control" id="TelefonoMovil" name="TelefonoMovil" required>
       </div>
-     
+    </br>
       <body>
         <div class="container text-center mt-5">
-            <div class="col-12">
-                <button type="button" id="bton" class="btn custom-button btn-blue">Registrarse</button>
-                <a href="/log.admin/loginadd.html" type="button" id="btn2" class="btn custom-button btn-green">Iniciar Sesión</a>
-            </div>
-       
+          <div class="col-12">
 
-        </div>
+              <a type="button" id="bton" class="btn custom-button btn-blue custom-font">Registrarse</a>
+
+              <a href="/log.admin/loginadd.html" type="button" id="btn2" class="btn custom-button btn-green custom-font">Iniciar Sesión</a>
+          </div>
+      </div>
+      
     </body>
+    
     <script type="module">
 
 

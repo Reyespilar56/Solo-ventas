@@ -20,12 +20,12 @@
 
     <form action="" method="post" id="registroForm" class="row g-3">
       <div class="col-md-6">
-        <label for="nombre" class="form-label">Nombre completo:</label>
+        <label for="nombre" class="form-label">Nombre completo: <span style="color: red;">*</span></label>
         <input type="text" class="form-control" id="Nombre" name="Nombre" required>
       </div>
 
       <div class="col-md-6">
-        <label for="usuario" class="form-label">Nombre de usuario a ocupar:</label>
+        <label for="usuario" class="form-label">Nombre de usuario a ocupar: <span style="color: red;">*</span></label>
         <input type="text" class="form-control" id="usuario" name="usuario" required>
       </div>
 
@@ -34,11 +34,11 @@
         <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" required>
       </div>
       <div class="col-md-6">
-        <label for="contrasena" class="form-label">Contraseña:</label>
+        <label for="contrasena" class="form-label">Contraseña: <span style="color: red;">*</span></label>
         <input type="password" class="form-control" id="contrasena" name="contrasena" required>
       </div>
       <div class="col-md-6">
-        <label for="confirmarContrasena" class="form-label">Confirmar contraseña:</label>
+        <label for="confirmarContrasena" class="form-label">Confirmar contraseña:<span style="color: red;">*</span></label>
         <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
       </div>
       <!-- <div class="col-md-6">
@@ -53,10 +53,11 @@
         <label for="Direccion" class="form-label">Dirección:</label>
         <input type="text" class="form-control" id="Direccion" name="Direccion" required>
       </div> -->
+    </br>
       <body>
         <div class="container text-center mt-5">
             <div class="col-12">
-                <button type="button" id="bton" class="btn custom-button btn-blue">Registrarse</button>
+                <a type="button" id="bton" class="btn custom-button btn-blue">Registrarse</a>
                 <a href="/login/Login.html" type="button" id="btn2" class="btn custom-button btn-green">Iniciar Sesión</a>
             </div>
             <div class="col-12 text-center mt-4">

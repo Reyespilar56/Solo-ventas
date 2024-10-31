@@ -40,8 +40,15 @@ document.addEventListener('DOMContentLoaded', function () {
   confirmar.addEventListener('click', function () {
     // Validar campos necesarios
     const requiredFields = [
+      inputcalle,
+      inputcp,
+  inputnumeroExt,
+  inputentreCalles,
+  inputReferencias,
+  inputCoordenadas,
+  inputpaquete,
+  anticipoAmountInput,
       inputNombre,
-      inputEmail,
       inputTelefono,
       FechaInicio,
       FechaFin,
@@ -61,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
         field.classList.remove('input-error'); // Quitar error si el campo está lleno
       }
     });
+    
   
     if (!allFieldsFilled) {
       mensaje.innerHTML = 'Por favor, completa todos los campos requeridos.';

@@ -43,38 +43,60 @@ function mostrarMensaje(texto) {
 }
 
 // Función para validar los datos del formulario
-function validarFormulario(nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena, confirmarContrasena) {
+function validarFormulario(nombre, correoElectronico,  TelefonoMovil,  usuario, contrasena, confirmarContrasena) {
     // Expresión regular para validar el formato del correo electrónico
     var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Validación de campos obligatorios
-    if (!nombre) {
-        mostrarMensaje('Por favor, ingrese su nombre.'); // Mensaje en el elemento
-        return false;
-    }
-    if (!correoElectronico || !regexCorreo.test(correoElectronico)) {
-        mostrarMensaje('Por favor, ingrese un correo electrónico válido.'); // Mensaje en el elemento
-        return false;
-    }
-    
-    if (!TelefonoMovil) {
-        mostrarMensaje('Por favor, ingrese su teléfono móvil.'); // Mensaje en el elemento
-        return false;
-    }
-    
-    if (!usuario) {
-        mostrarMensaje('Por favor, ingrese un usuario.'); // Mensaje en el elemento
-        return false;
-    }
-    if (!contrasena) {
-        mostrarMensaje('Por favor, ingrese una contraseña válida.'); // Mensaje en el elemento
-        return false;
-    }
-    if (contrasena !== confirmarContrasena) {
-        mostrarMensaje('Las contraseñas no coinciden.'); // Mensaje en el elemento
-        return false;
-    }
 
-    // Si todas las validaciones pasan, retorna verdadero
-    return true;
+// Función para mostrar mensajes en el elemento mensaje
+function mostrarMensaje(texto, tipo = 'success') {
+    // Selecciona el elemento mensaje y establece su texto
+    mensaje.textContent = texto;
+    mensaje.style.padding = '10px';
+    mensaje.style.borderRadius = '5px';
+    mensaje.style.marginTop = '10px';
+
+    if (tipo === 'error') {
+        // Estilos para el mensaje de error
+        mensaje.style.color = 'red'; // Texto en rojo
+        mensaje.style.backgroundColor = '#f8d7da'; // Fondo rosado
+        mensaje.style.border = '1px solid red'; // Borde rojo
+    } else {
+        // Estilos para el mensaje de éxito
+        mensaje.style.color = 'green'; // Texto en verde
+        mensaje.style.backgroundColor = '#d4edda'; // Fondo verde claro
+        mensaje.style.border = '1px solid green'; // Borde verde
+    }
+}
+
+// Validación de campos obligatorios
+if (!nombre) {
+    mostrarMensaje('Por favor, ingrese su nombre.', 'error'); // Mensaje de error
+    return false;
+}
+if (!correoElectronico || !regexCorreo.test(correoElectronico)) {
+    mostrarMensaje('Por favor, ingrese un correo electrónico válido.', 'error'); // Mensaje de error
+    return false;
+}
+if (!TelefonoMovil) {
+    mostrarMensaje('Por favor, ingrese su teléfono móvil.', 'error'); // Mensaje de error
+    return false;
+}
+if (!usuario) {
+    mostrarMensaje('Por favor, ingrese un usuario.', 'error'); // Mensaje de error
+    return false;
+}
+if (!contrasena) {
+    mostrarMensaje('Por favor, ingrese una contraseña válida.', 'error'); // Mensaje de error
+    return false;
+}
+if (contrasena !== confirmarContrasena) {
+    mostrarMensaje('Las contraseñas no coinciden.', 'error'); // Mensaje de error
+    return false;
+}
+
+// Si todas las validaciones pasan, muestra un mensaje de éxito
+mostrarMensaje('Registro exitoso.', 'success'); // Mensaje de éxito
+// Si todas las validaciones pasan, retorna verdadero
+return true;
 }

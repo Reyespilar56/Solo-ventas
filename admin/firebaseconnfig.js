@@ -54,7 +54,7 @@ bton.addEventListener("click", async (e) => {
   var confirmarContrasena = document.getElementById('confirmarContrasena').value;
 
   // Validar el formulario
-  if (!validarFormulario(Nombre, correoElectronico, TelefonoMovil, usuario, contrasena, confirmarContrasena)) {
+  if (!validarFormulario(Nombre, TelefonoMovil, usuario, contrasena, confirmarContrasena)) {
       return; // Detener el proceso si la validación falla
   }
 
@@ -66,9 +66,8 @@ bton.addEventListener("click", async (e) => {
       const docRef = await addDoc(collection(db, "administradores"), {
           Usuario: usuario,
           Nombre: Nombre,
-          email: correoElectronico,
-          movil: TelefonoMovil,
-          contraseña: hashedPassword
+          contraseña: contrasena,
+          confirmarContrasena:hashedPassword
       });
 
       console.log("Documento agregado con ID: ", docRef.id);

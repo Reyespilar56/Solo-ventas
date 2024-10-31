@@ -25,28 +25,24 @@ bton.addEventListener('click', function() {
   console.log("datos", usuarioId, Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena);
 
   // Valida el formulario y si es válido, envía la solicitud
-  if (validarFormulario(Nombre, correoElectronico,TelefonoMovil, usuario, contrasena, confirmarContrasena)) {
+  if (validarFormulario(Nombre,TelefonoMovil, usuario, contrasena, confirmarContrasena)) {
     console.log("Validacion"); // Muestra en la consola que la validación fue exitosa
     enviarSolicitud(usuarioId, Nombre, correoElectronico, Telefono, TelefonoMovil, Direccion, usuario, contrasena);
   } 
 });
 
 // Función para validar los datos del formulario
-function validarFormulario(nombre, correoElectronico,  TelefonoMovil,  usuario, contrasena, confirmarContrasena) {
+function validarFormulario(nombre,   TelefonoMovil,  usuario, contrasena, confirmarContrasena) {
   // Expresión regular para validar el formato del correo electrónico
   var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   // Valida que todos los campos no estén vacíos
-  if (!nombre || !correoElectronico ||  !TelefonoMovil ||  !usuario || !contrasena || !confirmarContrasena) {
+  if (!nombre || !usuario || !contrasena || !confirmarContrasena) {
     mostrarMensaje('Por favor, complete todos los campos.', 'error');
     return false;
   }
 
-  // Valida que el correo electrónico tenga un formato válido
-  if (!regexCorreo.test(correoElectronico)) {
-    mostrarMensaje('Por favor, ingrese un correo electrónico válido.', 'error');
-    return false;
-  }
+ 
 
   // Valida que las contraseñas coincidan
   if (contrasena !== confirmarContrasena) {

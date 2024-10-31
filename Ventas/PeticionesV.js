@@ -35,6 +35,7 @@ selectTipoBusqueda.addEventListener('change', () => {
   divTelefono.style.display = 'none';
   divCliente.style.display = 'none';
   divFecha.style.display = 'none';
+  
 
   const tipo = selectTipoBusqueda.value;
   if (tipo === 'zona') divZona.style.display = 'block';
